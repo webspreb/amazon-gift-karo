@@ -51,3 +51,44 @@ export function getVibes(): string[] {
   giftRegistry.forEach(g => g.categories.vibes?.forEach(v => vibes.add(v)));
   return Array.from(vibes);
 }
+
+export function searchGifts(query: string): GiftEntry[] {
+  const q = query.toLowerCase();
+  return giftRegistry.filter(g =>
+    g.title.toLowerCase().includes(q) ||
+    g.description.toLowerCase().includes(q) ||
+    g.categories.vibes?.some(v => v.includes(q)) ||
+    g.categories.occasions?.some(o => o.includes(q)) ||
+    g.categories.festivals?.some(f => f.includes(q))
+  );
+}
+
+export interface GiftFilters {
+  festival?: string;
+  occasion?: string;
+  relationship?: string;
+  vibe?: string;
+  minPrice?: number;
+  maxPrice?: number;
+}
+
+function parsePriceRange(priceRange: string): { min: number; max: number } | null {
+  const numbers = priceRange.match(/[\d,]+/g);
+  if (!numbers) return null;
+  const parsed = numbers.map(n => parseInt(n.replace(/,/g, '')));
+  return { min: parsed[0] || 0, max: parsed[1] || parsed[0] || Infinity };
+}
+
+export function filterGifts(filters: GiftFilters): GiftEntry[] {
+  return giftRegistry.filter(g => {
+    if (filters.festival && !g.categories.festivals?.includes(filters.festival)) return false;
+    if (filters.occasion && !g.categories.occasions?.includes(filters.occasion)) return false;
+    if (filters.relationship && !g.categories.relationships?.includes(filters.relationship)) return false;
+    if (filters.vibe && !g.categories.vibes?.includes(filters.vibe)) return false;
+    if (filters.maxPrice) {
+      const range = parsePriceRange(g.priceRange);
+      if (range && range.min > filters.maxPrice) return false;
+    }
+    return true;
+  });
+}
