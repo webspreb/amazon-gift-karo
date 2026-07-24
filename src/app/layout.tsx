@@ -17,20 +17,20 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "GiftKaro — Unique Gift Ideas for Every Occasion",
-    template: "%s | GiftKaro",
+    default: "CuratedGift — Unique Gift Ideas for Every Occasion",
+    template: "%s | CuratedGift",
   },
   description: "Discover thoughtful, unexpected gift ideas for Indian festivals, birthdays, anniversaries and more. Curated picks for every budget.",
   openGraph: {
-    title: "GiftKaro — Unique Gift Ideas for Every Occasion",
+    title: "CuratedGift — Unique Gift Ideas for Every Occasion",
     description: "Discover thoughtful, unexpected gift ideas for Indian festivals, birthdays, anniversaries and more.",
-    siteName: "GiftKaro",
+    siteName: "CuratedGift",
     locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "GiftKaro — Unique Gift Ideas",
+    title: "CuratedGift — Unique Gift Ideas",
     description: "Discover thoughtful, unexpected gift ideas for Indian festivals and occasions.",
   },
   robots: {

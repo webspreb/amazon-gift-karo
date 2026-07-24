@@ -6,7 +6,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <div>
-            <h3 className="text-lg font-bold text-gray-900">🎁 GiftKaro</h3>
+            <h3 className="text-lg font-bold text-gray-900">CuratedGift</h3>
             <p className="mt-2 text-sm text-gray-600">
               Curated, unexpected gift ideas for every Indian festival and occasion.
             </p>
@@ -31,7 +31,7 @@ export function Footer() {
         </div>
         <div className="mt-8 border-t pt-6">
           <AffiliateDisclosure />
-          <p className="mt-2 text-xs text-gray-400">© 2026 GiftKaro. All rights reserved.</p>
+          <p className="mt-2 text-xs text-gray-400">© 2026 CuratedGift. All rights reserved.</p>
         </div>
       </div>
     </footer>
