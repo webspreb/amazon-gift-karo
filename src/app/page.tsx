@@ -3,8 +3,10 @@ import { getNewArrivals, getTrendingGifts, getFestivals, getVibes } from '@/lib/
 import { GiftCard } from '@/components/GiftCard';
 import { SeasonalHero } from '@/components/SeasonalHero';
 import { CategoryGrid } from '@/components/CategoryGrid';
+import { getActiveSeason } from '@/lib/themes';
 
 export default function HomePage() {
+  const season = getActiveSeason();
   const newArrivals = getNewArrivals(6);
   const trendingGifts = getTrendingGifts(8);
   const festivals = getFestivals();
@@ -25,8 +27,9 @@ export default function HomePage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-12">
       <SeasonalHero
-        title="Find the Perfect Gift"
-        subtitle="Discover thoughtful, unexpected gift ideas for every Indian festival and occasion. Curated picks for every budget."
+        title={season.hero.title}
+        subtitle={season.hero.subtitle}
+        bgClass={season.hero.bgClass}
         ctaText="Explore Gifts"
         ctaHref="/search"
       />
