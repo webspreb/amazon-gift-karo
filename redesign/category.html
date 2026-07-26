@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Curated gift ideas for every occasion. Find thoughtful, unique gifts for festivals, birthdays, and more.">
+  <meta name="theme-color" content="#F59E0B">
+  <title>Category — GiftKaro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme-tokens.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font: var(--text-base)/var(--leading-normal) var(--font-body);
+      color: var(--theme-text-primary);
+      background: var(--theme-bg-start);
+      min-height: 100vh;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--container-gutter);
+    }
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* ============================================================
+       HEADER / NAVIGATION
+       ============================================================ */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--theme-bg-card);
+      border-bottom: 1px solid var(--theme-border);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--header-height);
+      gap: var(--space-4);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font: 700 var(--text-xl) var(--font-display);
+      color: var(--theme-text-primary);
+      letter-spacing: var(--tracking-tight);
+    }
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--theme-primary);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--theme-text-on-primary);
+      font-size: 20px;
+    }
+    .nav {
+      display: none;
+      gap: var(--space-8);
+    }
+    .nav-link {
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      padding: var(--space-2) 0;
+      border-bottom: 2px solid transparent;
+      transition: all var(--transition-fast);
+    }
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color: var(--theme-primary);
+      border-color: var(--theme-primary);
+      outline: none;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      background: var(--theme-bg-elevated);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .theme-toggle-btn:hover {
+      border-color: var(--theme-primary);
+      color: var(--theme-primary);
+    }
+    .mobile-menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: none;
+      color: var(--theme-text-primary);
+      cursor: pointer;
+      border-radius: var(--radius-md);
+    }
+    .mobile-menu-btn:hover { background: var(--theme-bg-elevated); }
+    .mobile-menu-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+    @media (min-width: 768px) {
+      .nav { display: flex; }
+      .mobile-menu-btn { display: none; }
+    }
+
+    /* ============================================================
+       HERO SECTION
+       ============================================================ */
+    .hero {
+      position: relative;
+      padding: var(--space-20) 0 var(--space-16);
+      background: var(--hero-gradient);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--hero-illustration);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-primary);
+      background: var(--theme-primary-light);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-full);
+      margin-bottom: var(--space-6);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font: 700 var(--text-5xl)/var(--leading-tight) var(--font-display);
+      letter-spacing: var(--tracking-tight);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-6);
+    }
+    .hero-subtitle {
+      font: var(--text-lg)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+      margin-bottom: var(--space-10);
+      max-width: 56ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ============================================================
+       SECTION BASE
+       ============================================================ */
+    .section {
+      padding: var(--space-16) 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-12);
+    }
+    .section-title {
+      font: 700 var(--text-3xl)/var(--leading-tight) var(--font-display);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-4);
+    }
+    .section-desc {
+      font: var(--text-lg)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+      max-width: 56ch;
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       EDITORIAL CONTENT
+       ============================================================ */
+    .editorial {
+      padding: var(--space-12) 0;
+      background: var(--theme-bg-card);
+      border-top: 1px solid var(--theme-border);
+      border-bottom: 1px solid var(--theme-border);
+    }
+    .editorial-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .editorial h2 {
+      font: 600 var(--text-2xl)/var(--leading-tight) var(--font-display);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-6);
+    }
+    .editorial p {
+      font: var(--text-base)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+      margin-bottom: var(--space-4);
+    }
+    .editorial p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ============================================================
+       GIFT GRID
+       ============================================================ */
+    .gift-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    @media (min-width: 640px) {
+      .gift-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .gift-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .gift-card {
+      background: var(--theme-bg-card);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--transition-base);
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .gift-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .gift-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--theme-border-hover);
+    }
+    .gift-card-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: var(--theme-bg-elevated);
+    }
+    .gift-card-content {
+      padding: var(--space-5);
+    }
+    .gift-card-title {
+      font: 600 var(--text-base) var(--font-body);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-1);
+      line-height: var(--leading-snug);
+    }
+    .gift-card-subtitle {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      margin-bottom: var(--space-3);
+    }
+    .gift-card-preview {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-tertiary);
+      margin-bottom: var(--space-4);
+      line-height: var(--leading-relaxed);
+    }
+    .gift-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--theme-border);
+    }
+    .gift-card-price {
+      font: 600 var(--text-sm) var(--font-body);
+      color: var(--theme-primary);
+      font-family: var(--font-mono);
+    }
+    .gift-card-cta {
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-primary);
+    }
+
+    /* ============================================================
+       RELATED CATEGORIES
+       ============================================================ */
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+    @media (min-width: 640px) {
+      .related-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .related-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-6) var(--space-4);
+      background: var(--theme-bg-card);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      transition: all var(--transition-fast);
+    }
+    .related-card:hover {
+      border-color: var(--theme-primary);
+      box-shadow: var(--shadow-md);
+    }
+    .related-icon {
+      font-size: 32px;
+      line-height: 1;
+    }
+    .related-name {
+      font: 600 var(--text-sm) var(--font-body);
+      color: var(--theme-text-primary);
+    }
+    .related-count {
+      font: var(--text-xs) var(--font-body);
+      color: var(--theme-text-tertiary);
+    }
+
+    /* ============================================================
+       CTA SECTION
+       ============================================================ */
+    .cta-section {
+      padding: var(--space-16) 0;
+      text-align: center;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4) var(--space-8);
+      font: 600 var(--text-base) var(--font-body);
+      color: var(--theme-text-on-primary);
+      background: var(--theme-primary);
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .cta-btn:hover {
+      background: var(--theme-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      padding: var(--space-16) 0 var(--space-8);
+      background: var(--theme-bg-card);
+      border-top: 1px solid var(--theme-border);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      margin-bottom: var(--space-12);
+    }
+    @media (min-width: 640px) {
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    }
+    .footer-brand {
+      max-width: 320px;
+    }
+    .footer-logo {
+      font: 700 var(--text-xl) var(--font-display);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-3);
+    }
+    .footer-desc {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      line-height: var(--leading-relaxed);
+    }
+    .footer-heading {
+      font: 600 var(--text-sm) var(--font-body);
+      color: var(--theme-text-primary);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      margin-bottom: var(--space-4);
+    }
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .footer-link {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      transition: color var(--transition-fast);
+    }
+    .footer-link:hover {
+      color: var(--theme-primary);
+    }
+    .footer-bottom {
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--theme-border);
+      text-align: center;
+    }
+    .footer-disclosure {
+      font: var(--text-xs) var(--font-body);
+      color: var(--theme-text-tertiary);
+      margin-bottom: var(--space-2);
+    }
+    .footer-copyright {
+      font: var(--text-xs) var(--font-body);
+      color: var(--theme-text-tertiary);
+    }
+
+    /* ============================================================
+       SKELETON LOADING
+       ============================================================ */
+    .skeleton {
+      background: linear-gradient(90deg, var(--theme-bg-elevated) 25%, var(--theme-bg-card) 50%, var(--theme-bg-elevated) 75%);
+      background-size: 200% 100%;
+      animation: skeleton-pulse 1.5s ease-in-out infinite;
+      border-radius: var(--radius-md);
+    }
+    @keyframes skeleton-pulse {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .skeleton-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+    }
+    .skeleton-title {
+      height: 20px;
+      width: 80%;
+      margin-bottom: var(--space-2);
+    }
+    .skeleton-text {
+      height: 14px;
+      width: 60%;
+      margin-bottom: var(--space-2);
+    }
+    .skeleton-price {
+      height: 16px;
+      width: 40%;
+    }
+
+    /* ============================================================
+       MOBILE MENU
+       ============================================================ */
+    .mobile-menu-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+    .mobile-menu-backdrop.open { opacity: 1; }
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 300px;
+      max-width: 85vw;
+      background: var(--theme-bg-card);
+      z-index: 201;
+      transform: translateX(100%);
+      transition: transform var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-6);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-8);
+    }
+    .mobile-menu-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: none;
+      color: var(--theme-text-primary);
+      cursor: pointer;
+      border-radius: var(--radius-md);
+    }
+    .mobile-menu-close:hover { background: var(--theme-bg-elevated); }
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .mobile-nav-link {
+      font: 500 var(--text-base) var(--font-body);
+      color: var(--theme-text-secondary);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+    }
+    .mobile-nav-link:hover {
+      background: var(--theme-bg-elevated);
+      color: var(--theme-primary);
+    }
+
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .gift-card { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" data-od-id="header">
+    <div class="container header-inner">
+      <a href="homepage.html" class="logo" aria-label="GiftKaro Home" data-od-id="logo">
+        <span class="logo-mark" aria-hidden="true">🎁</span>
+        GiftKaro
+      </a>
+      <nav class="nav" aria-label="Main navigation" data-od-id="main-nav">
+        <a href="search.html" class="nav-link">Search</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Change theme" data-od-id="theme-toggle">
+          Theme
+        </button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" data-od-id="mobile-menu-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-backdrop" id="mobileMenuBackdrop" data-od-id="mobile-menu-backdrop"></div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" data-od-id="mobile-menu">
+    <div class="mobile-menu-header">
+      <span class="logo" style="font-size: var(--text-lg);">
+        <span class="logo-mark" aria-hidden="true" style="width:28px;height:28px;font-size:16px;">🎁</span>
+        GiftKaro
+      </span>
+      <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu" data-od-id="mobile-menu-close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="mobile-nav">
+      <a href="search.html" class="mobile-nav-link">Search</a>
+      <a href="about.html" class="mobile-nav-link">About</a>
+      <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
+      <a href="contact.html" class="mobile-nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" data-od-id="hero">
+    <div class="container hero-content">
+      <span class="hero-badge" id="heroSeasonText" data-od-id="hero-badge">Loading...</span>
+      <h1 class="hero-title" id="heroTitle" data-od-id="hero-title">Gift Ideas</h1>
+      <p class="hero-subtitle" id="heroSubtitle" data-od-id="hero-subtitle">Thoughtful, curated gifts for this occasion.</p>
+    </div>
+  </section>
+
+  <main>
+    <!-- Gift Grid -->
+    <section class="section" data-od-id="gifts-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" id="gridTitle" data-od-id="grid-title">Featured Gifts</h2>
+          <p class="section-desc" id="gridDesc" data-od-id="grid-desc">Handpicked for this occasion.</p>
+        </div>
+        <div class="gift-grid" id="giftGrid" role="list" data-od-id="gift-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Editorial -->
+    <section class="editorial" data-od-id="editorial">
+      <div class="container editorial-inner" id="editorialContent" data-od-id="editorial-inner">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Related Categories -->
+    <section class="section" data-od-id="related-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" data-od-id="related-title">Related Categories</h2>
+          <p class="section-desc" data-od-id="related-desc">More occasions to explore.</p>
+        </div>
+        <div class="related-grid" id="relatedGrid" role="list" data-od-id="related-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" data-od-id="cta-section">
+      <div class="container">
+        <a href="search.html" class="cta-btn" data-od-id="cta-btn">Browse All Gifts →</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo" data-od-id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand" data-od-id="footer-brand">
+          <div class="footer-logo" data-od-id="footer-logo">🎁 GiftKaro</div>
+          <p class="footer-desc" data-od-id="footer-desc">Curated gift discovery for every occasion. We help you find thoughtful, unique gifts — no cart, no checkout, just click through to Amazon.</p>
+        </div>
+        <nav aria-label="Festival gifts" data-od-id="footer-festivals">
+          <h3 class="footer-heading" data-od-id="footer-festivals-title">Festivals</h3>
+          <ul class="footer-links" data-od-id="footer-festivals-links">
+            <li><a href="category.html?cat=diwali" class="footer-link">Diwali</a></li>
+            <li><a href="category.html?cat=christmas" class="footer-link">Christmas</a></li>
+            <li><a href="category.html?cat=valentines" class="footer-link">Valentine's Day</a></li>
+            <li><a href="category.html?cat=holi" class="footer-link">Holi</a></li>
+            <li><a href="category.html?cat=eid" class="footer-link">Eid</a></li>
+            <li><a href="category.html?cat=rakhi" class="footer-link">Raksha Bandhan</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Occasions" data-od-id="footer-occasions">
+          <h3 class="footer-heading" data-od-id="footer-occasions-title">Occasions</h3>
+          <ul class="footer-links" data-od-id="footer-occasions-links">
+            <li><a href="category.html?cat=birthday" class="footer-link">Birthday</a></li>
+            <li><a href="category.html?cat=anniversary" class="footer-link">Anniversary</a></li>
+            <li><a href="category.html?cat=housewarming" class="footer-link">Housewarming</a></li>
+            <li><a href="category.html?cat=wedding" class="footer-link">Wedding</a></li>
+            <li><a href="category.html?cat=baby-shower" class="footer-link">Baby Shower</a></li>
+            <li><a href="category.html?cat=graduation" class="footer-link">Graduation</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Vibes" data-od-id="footer-vibes">
+          <h3 class="footer-heading" data-od-id="footer-vibes-title">Vibes</h3>
+          <ul class="footer-links" data-od-id="footer-vibes-links">
+            <li><a href="search.html?vibe=minimal" class="footer-link">Minimal</a></li>
+            <li><a href="search.html?vibe=luxury" class="footer-link">Luxury</a></li>
+            <li><a href="search.html?vibe=quirky" class="footer-link">Quirky</a></li>
+            <li><a href="search.html?vibe=sentimental" class="footer-link">Sentimental</a></li>
+            <li><a href="search.html?vibe=eco-friendly" class="footer-link">Eco-Friendly</a></li>
+            <li><a href="search.html?vibe=tech" class="footer-link">Tech</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom" data-od-id="footer-bottom">
+        <p class="footer-disclosure" data-od-id="footer-disclosure">As an Amazon Associate, I earn from qualifying purchases</p>
+        <p class="footer-copyright" data-od-id="footer-copyright">© 2026 GiftKaro. Not affiliated with Amazon.in. All product links are affiliate links.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ============================================================
+    // DATA
+    // ============================================================
+    const allGifts = [
+      { id: 'g1', title: 'Handcrafted Brass Diya Set', subtitle: 'Set of 4 traditional oil lamps', priceMin: 899, priceMax: 1499, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%23F59E0B" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Brass Diyas</text></svg>', preview: 'Handmade by artisans in Moradabad using traditional techniques', categories: ['diwali'], tags: ['traditional', 'handmade'] },
+      { id: 'g2', title: 'Luxury Christmas Gift Box', subtitle: 'Curated artisanal treats & decor', priceMin: 2499, priceMax: 4999, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%23DC2626" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Christmas Box</text></svg>', preview: 'Premium chocolates, ornaments, and scented candles', categories: ['christmas'], tags: ['luxury', 'premium'] },
+      { id: 'g3', title: 'Minimalist Leather Journal', subtitle: 'Hand-stitched, refillable pages', priceMin: 1299, priceMax: 1899, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%2364748B" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Leather Journal</text></svg>', preview: 'Full-grain leather, lays flat, includes pen loop', categories: ['birthday', 'anniversary'], tags: ['minimal', 'sentimental'] },
+      { id: 'g4', title: 'Smart Plant Sensor', subtitle: 'Monitors moisture, light & nutrients', priceMin: 1999, priceMax: 2799, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%2316A34A" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Plant Sensor</text></svg>', preview: 'Bluetooth connectivity, 6-month battery, app alerts', categories: ['housewarming'], tags: ['tech', 'eco-friendly'] },
+      { id: 'g5', title: 'Artisan Ceramic Tea Set', subtitle: 'Hand-thrown, 2 cups + pot', priceMin: 1599, priceMax: 2499, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%23E11D48" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Tea Set</text></svg>', preview: 'Food-safe glaze, microwave safe, gift boxed', categories: ['anniversary', 'housewarming'], tags: ['sentimental', 'handmade'] },
+      { id: 'g6', title: 'Bamboo Wireless Charger', subtitle: '15W fast charge, eco materials', priceMin: 899, priceMax: 1299, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%238FBC8F" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Bamboo Charger</text></svg>', preview: 'Sustainable bamboo, Qi-certified, LED indicator', categories: ['birthday'], tags: ['tech', 'eco-friendly'] },
+      { id: 'g7', title: 'Custom Star Map Poster', subtitle: 'Night sky from any date/location', priceMin: 999, priceMax: 1799, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%231E293B" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Star Map</text></svg>', preview: 'Archival paper, multiple sizes, framed option', categories: ['valentines', 'anniversary'], tags: ['sentimental', 'custom'] },
+      { id: 'g8', title: 'Gourmet Spice Collection', subtitle: '12 rare spices in magnetic tins', priceMin: 1499, priceMax: 2199, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%23EA580C" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Spice Kit</text></svg>', preview: 'Ethically sourced, includes recipe cards', categories: ['wedding', 'housewarming'], tags: ['gourmet', 'premium'] },
+      { id: 'g9', title: 'Lavender Soy Candle Set', subtitle: '3 hand-poured candles, 40hr burn', priceMin: 799, priceMax: 1299, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%23A855F7" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Candle Set</text></svg>', preview: 'Natural soy wax, cotton wick, reusable jars', categories: ['housewarming', 'birthday'], tags: ['wellness', 'eco-friendly'] },
+      { id: 'g10', title: 'Personalized Name Necklace', subtitle: 'Sterling silver, adjustable chain', priceMin: 1299, priceMax: 2499, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%23F472B6" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Name Necklace</text></svg>', preview: '925 sterling silver, hypoallergenic, gift boxed', categories: ['valentines', 'birthday'], tags: ['sentimental', 'custom'] },
+      { id: 'g11', title: 'Organic Matcha Starter Kit', subtitle: 'Ceremonial grade + bamboo whisk', priceMin: 1699, priceMax: 2499, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%2322C55E" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Matcha Kit</text></svg>', preview: 'Japanese ceremonial grade, hand-carved whisk, recipe book', categories: ['birthday'], tags: ['gourmet', 'wellness'] },
+      { id: 'g12', title: 'Vintage Globe Drink Dispenser', subtitle: 'Glass globe on brass stand', priceMin: 1899, priceMax: 2999, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%23F59E0B" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Globe Dispenser</text></svg>', preview: 'Handblown glass, brass hardware, 1.5L capacity', categories: ['housewarming', 'wedding'], tags: ['luxury', 'quirky'] },
+    ];
+
+    const categoryMeta = {
+      diwali: { name: 'Diwali Gifts', icon: '🪔', desc: 'Illuminate their celebrations with handcrafted diyas, artisanal sweets, and thoughtful treasures for the Festival of Lights.', editorial: 'Diwali is more than lights and sweets — it\'s about expressing love, gratitude, and hope. Our curated Diwali gifts go beyond the ordinary, featuring handcrafted brass diyas from Moradabad, artisanal mithai boxes, and unique home decor pieces that bring warmth to every corner. Each gift tells a story of craftsmanship and care, making your celebrations truly meaningful.', related: ['holi', 'rakhi', 'eid'] },
+      christmas: { name: 'Christmas Gifts', icon: '🎄', desc: 'Celebrate the season of giving with curated gift boxes, artisanal treats, and heartfelt surprises.', editorial: 'Christmas is about creating moments of wonder and joy. Our curated Christmas collection features luxury gift boxes with artisanal chocolates, handpicked ornaments, scented candles, and unique finds that bring smiles. From cozy winter essentials to elegant home decor, every gift is chosen to make the season magical.', related: ['valentines', 'birthday', 'housewarming'] },
+      valentines: { name: "Valentine's Gifts", icon: '💝', desc: 'Express love with personalized keepsakes, romantic experiences, and thoughtful surprises.', editorial: 'Love deserves more than flowers and chocolate. Our Valentine\'s collection features personalized star maps of your special night, handcrafted jewelry, artisanal treat boxes, and sentimental keepsakes that capture your story. Each gift is chosen to make your loved one feel truly cherished.', related: ['anniversary', 'birthday', 'christmas'] },
+      birthday: { name: 'Birthday Gifts', icon: '🎂', desc: 'Find the perfect gift for every personality — from tech enthusiasts to wellness lovers.', editorial: 'Birthdays are about celebrating the unique person in your life. Our curated birthday collection spans every interest and personality — from smart plant sensors for the green thumb to artisanal tea sets for the mindful soul. Skip the generic gifts and find something that truly speaks to who they are.', related: ['anniversary', 'graduation', 'housewarming'] },
+      anniversary: { name: 'Anniversary Gifts', icon: '💍', desc: 'Commemorate your journey together with sentimental, elegant, and meaningful gifts.', editorial: 'Anniversaries celebrate the story you\'re writing together. Our curated collection features personalized star maps, artisanal ceramic sets, handcrafted leather journals, and elegant keepsakes that mark your journey. Each gift is chosen to honor your unique bond.', related: ['valentines', 'birthday', 'wedding'] },
+      housewarming: { name: 'Housewarming Gifts', icon: '🏠', desc: 'Welcome them home with smart home gadgets, artisanal decor, and thoughtful essentials.', editorial: 'A new home is a fresh chapter. Our housewarming collection features smart plant sensors for the urban jungle, artisanal tea sets for cozy mornings, bamboo chargers for the modern home, and vintage decor pieces that add character. Each gift helps turn a house into a home.', related: ['wedding', 'diwali', 'christmas'] },
+      wedding: { name: 'Wedding Gifts', icon: '💒', desc: 'Celebrate their union with elegant, practical, and memorable gifts they\'ll treasure.', editorial: 'Weddings mark the beginning of a beautiful journey. Our curated collection features artisanal spice collections for the foodie couple, elegant drink dispensers for their new home, and sentimental keepsakes that commemorate their special day. Each gift is chosen to bless their new chapter.', related: ['anniversary', 'housewarming', 'valentines'] },
+      holi: { name: 'Holi Gifts', icon: '🌈', desc: 'Add color to celebrations with vibrant, festive, and joyful gift picks.', editorial: 'Holi is the festival of colors, joy, and togetherness. Our curated collection features vibrant home decor, artisanal sweets, colorful accessories, and festive essentials that make your celebrations brighter. Each gift captures the spirit of this joyous occasion.', related: ['diwali', 'rakhi', 'pongal'] },
+      eid: { name: 'Eid Gifts', icon: '🌙', desc: 'Honor the occasion with elegant, thoughtful, and culturally meaningful gifts.', editorial: 'Eid is a time of gratitude, generosity, and celebration. Our curated collection features elegant gift boxes, artisanal dates and sweets, decorative pieces, and thoughtful accessories that honor this blessed occasion. Each gift reflects the spirit of sharing and joy.', related: ['diwali', 'holi', 'rakhi'] },
+      rakhi: { name: 'Raksha Bandhan Gifts', icon: '🧵', desc: 'Celebrate the bond of siblings with unique rakhis and meaningful gifts.', editorial: 'Raksha Bandhan celebrates the beautiful bond between brothers and sisters. Our collection features unique handcrafted rakhis, matching accessories, personalized keepsakes, and sweet treats that honor this special relationship.', related: ['diwali', 'holi', 'eid'] },
+      graduation: { name: 'Graduation Gifts', icon: '🎓', desc: 'Congratulate their achievement with practical, inspiring, and memorable gifts.', editorial: 'Graduation marks a milestone of hard work and dedication. Our curated collection features practical tech gadgets, elegant journals for their next chapter, motivational keepsakes, and professional accessories that celebrate their achievement.', related: ['birthday', 'promotion', 'farewell'] },
+      baby_shower: { name: 'Baby Shower Gifts', icon: '👶', desc: 'Welcome the little one with thoughtful, safe, and adorable gifts for new parents.', editorial: 'A new arrival is one of life\'s greatest joys. Our baby shower collection features safe, thoughtful gifts for both parents and babies — from organic cotton essentials to memorable keepsakes that capture these precious moments.', related: ['birthday', 'housewarming'] },
+    };
+
+    const allCategories = {
+      diwali: { icon: '🪔', count: 24 },
+      christmas: { icon: '🎄', count: 18 },
+      valentines: { icon: '💝', count: 15 },
+      holi: { icon: '🌈', count: 12 },
+      eid: { icon: '🌙', count: 10 },
+      rakhi: { icon: '🧵', count: 8 },
+      birthday: { icon: '🎂', count: 42 },
+      anniversary: { icon: '💍', count: 28 },
+      housewarming: { icon: '🏠', count: 22 },
+      wedding: { icon: '💒', count: 35 },
+      baby_shower: { icon: '👶', count: 18 },
+      graduation: { icon: '🎓', count: 15 },
+    };
+
+    // ============================================================
+    // HELPERS
+    // ============================================================
+    function formatPrice(min, max) {
+      return `₹${min.toLocaleString()} – ₹${max.toLocaleString()}`;
+    }
+
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function renderGiftCard(gift) {
+      return `
+        <article class="gift-card" role="listitem" data-od-id="gift-card-${gift.id}">
+          <img src="${gift.image}" alt="${gift.title}" loading="lazy" class="gift-card-image" data-od-id="gift-img-${gift.id}">
+          <div class="gift-card-content">
+            <h3 class="gift-card-title" data-od-id="gift-title-${gift.id}">${gift.title}</h3>
+            <p class="gift-card-subtitle" data-od-id="gift-subtitle-${gift.id}">${gift.subtitle}</p>
+            <p class="gift-card-preview" data-od-id="gift-preview-${gift.id}">${gift.preview}</p>
+            <div class="gift-card-footer">
+              <span class="gift-card-price" data-od-id="gift-price-${gift.id}">${formatPrice(gift.priceMin, gift.priceMax)}</span>
+              <span class="gift-card-cta">View →</span>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderSkeletonCard() {
+      return `
+        <article class="gift-card" aria-hidden="true">
+          <div class="skeleton skeleton-image"></div>
+          <div style="padding: var(--space-5);">
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-text" style="width: 60%;"></div>
+            <div class="skeleton skeleton-text" style="width: 40%; margin-bottom: var(--space-3);"></div>
+            <div class="skeleton skeleton-price"></div>
+          </div>
+        </article>
+      `;
+    }
+
+    // ============================================================
+    // STAGGERED REVEAL
+    // ============================================================
+    function setupStaggeredReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, i * 80);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.gift-card').forEach(card => {
+        observer.observe(card);
+      });
+    }
+
+    // ============================================================
+    // INITIALIZE
+    // ============================================================
+    function init() {
+      const cat = getQueryParam('cat') || 'diwali';
+      const meta = categoryMeta[cat] || categoryMeta.diwali;
+
+      // Update page title
+      document.title = `${meta.name} — GiftKaro`;
+
+      // Update hero
+      document.getElementById('heroTitle').textContent = meta.name;
+      document.getElementById('heroSubtitle').textContent = meta.desc;
+      document.getElementById('gridTitle').textContent = `Featured ${meta.name}`;
+      document.getElementById('gridDesc').textContent = `Handpicked for ${meta.name.toLowerCase()}.`;
+
+      // Update editorial
+      document.getElementById('editorialContent').innerHTML = `
+        <h2>${meta.name} — A Curated Experience</h2>
+        <p>${meta.editorial}</p>
+      `;
+
+      // Filter gifts
+      const filtered = allGifts.filter(g => g.categories.includes(cat));
+      const grid = document.getElementById('giftGrid');
+
+      // Show skeleton first
+      grid.innerHTML = Array(6).fill(renderSkeletonCard()).join('');
+
+      // Render after delay
+      setTimeout(() => {
+        grid.innerHTML = filtered.length > 0
+          ? filtered.map(renderGiftCard).join('')
+          : allGifts.slice(0, 6).map(renderGiftCard).join('');
+        setupStaggeredReveal();
+      }, 600);
+
+      // Related categories
+      const relatedGrid = document.getElementById('relatedGrid');
+      relatedGrid.innerHTML = meta.related.map(id => {
+        const m = categoryMeta[id] || allCategories[id];
+        const name = m?.name || id.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        const icon = m?.icon || allCategories[id]?.icon || '🎁';
+        const count = m?.count || allCategories[id]?.count || 10;
+        return `
+          <a href="category.html?cat=${id}" class="related-card" role="listitem" data-od-id="related-${id}" aria-label="${name}">
+            <span class="related-icon" aria-hidden="true">${icon}</span>
+            <span class="related-name">${name}</span>
+            <span class="related-count">${count} gifts</span>
+          </a>
+        `;
+      }).join('');
+
+      // Theme toggle
+      setupThemeToggle();
+      setupMobileMenu();
+    }
+
+    function setupThemeToggle() {
+      const toggle = document.getElementById('themeToggle');
+      const themes = ['default', 'diwali', 'christmas', 'valentines'];
+      let currentIndex = themes.indexOf(document.documentElement.dataset.theme || 'default');
+      if (currentIndex === -1) currentIndex = 0;
+
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % themes.length;
+          const theme = themes[currentIndex];
+          document.documentElement.dataset.theme = theme === 'default' ? '' : theme;
+          localStorage.setItem('giftkaro-theme', theme);
+        });
+      }
+    }
+
+    function setupMobileMenu() {
+      const btn = document.getElementById('mobileMenuBtn');
+      const menu = document.getElementById('mobileMenu');
+      const close = document.getElementById('mobileMenuClose');
+      const backdrop = document.getElementById('mobileMenuBackdrop');
+
+      function openMenu() {
+        menu.classList.add('open');
+        backdrop.classList.add('open');
+        backdrop.style.display = 'block';
+        btn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMenu() {
+        menu.classList.remove('open');
+        backdrop.classList.remove('open');
+        backdrop.style.display = '';
+        btn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      btn?.addEventListener('click', openMenu);
+      close?.addEventListener('click', closeMenu);
+      backdrop?.addEventListener('click', closeMenu);
+
+      menu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu?.classList.contains('open')) closeMenu();
+      });
+    }
+
+    // Auto-apply theme on load
+    (function() {
+      const saved = localStorage.getItem('giftkaro-theme');
+      if (saved && saved !== 'default') {
+        document.documentElement.dataset.theme = saved;
+      } else {
+        const today = new Date();
+        const mmdd = `${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+        let theme = '';
+        if (mmdd >= '10-15' && mmdd <= '11-05') theme = 'diwali';
+        else if (mmdd >= '12-01' && mmdd <= '12-26') theme = 'christmas';
+        else if (mmdd >= '02-01' && mmdd <= '02-15') theme = 'valentines';
+        if (theme) document.documentElement.dataset.theme = theme;
+      }
+    })();
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  </script>
+</body>
+</html>

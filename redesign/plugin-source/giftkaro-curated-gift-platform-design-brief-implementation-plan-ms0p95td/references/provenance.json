@@ -1,0 +1,19 @@
+{
+  "candidateId": "5415ea0f-7b78-4e84-b27f-249075317196",
+  "projectId": "af07a541-4863-4bb9-b5df-b93217887bf4",
+  "runId": "fe8d3f9b-23f4-4ad2-9f4f-1ad40ef55443",
+  "conversationId": "36e3fdff-4595-44ab-add8-f3cf269c5184",
+  "provenance": {
+    "summary": "Detected from giftkaro-prd.md after a successful run.",
+    "detectedAt": 1784979747505
+  },
+  "sourceRefs": [
+    {
+      "kind": "file",
+      "value": "giftkaro-prd.md",
+      "label": "giftkaro-prd.md",
+      "size": 17416,
+      "copied": true
+    }
+  ]
+}

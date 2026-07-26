@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { getActiveSeason } from "@/lib/themes";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
@@ -44,12 +43,51 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const season = getActiveSeason();
-
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "GiftKaro",
+              "alternateName": "CuratedGift",
+              "url": "https://giftkaro.com",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://giftkaro.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('giftkaro-theme');
+                  if (saved && saved !== 'default') {
+                    document.documentElement.dataset.theme = saved;
+                  } else {
+                    var today = new Date();
+                    var mmdd = ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+                    var theme = '';
+                    if (mmdd >= '10-15' && mmdd <= '11-05') theme = 'diwali';
+                    else if (mmdd >= '12-01' && mmdd <= '12-26') theme = 'christmas';
+                    else if (mmdd >= '02-01' && mmdd <= '02-15') theme = 'valentines';
+                    if (theme) document.documentElement.dataset.theme = theme;
+                  }
+                } catch (e) {}
+              })();
+            `
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
-        <Header theme={{ primary: season.colors.primary, secondary: season.colors.secondary }} />
+        <Header />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>

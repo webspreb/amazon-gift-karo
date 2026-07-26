@@ -1,0 +1,1039 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="GiftKaro — Curated gift discovery for every occasion. Find thoughtful, unique gifts for Diwali, Christmas, Valentine's Day, birthdays, anniversaries, and more. No cart, no checkout — just click through to Amazon.">
+  <meta name="theme-color" content="#F59E0B">
+  <title>GiftKaro — Find Thoughtful Gifts for Every Occasion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme-tokens.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font: var(--text-base)/var(--leading-normal) var(--font-body);
+      color: var(--theme-text-primary);
+      background: var(--theme-bg-start);
+      min-height: 100vh;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--container-gutter);
+    }
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* ============================================================
+       HEADER / NAVIGATION
+       ============================================================ */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--theme-bg-card);
+      border-bottom: 1px solid var(--theme-border);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--header-height);
+      gap: var(--space-4);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font: 700 var(--text-xl) var(--font-display);
+      color: var(--theme-text-primary);
+      letter-spacing: var(--tracking-tight);
+    }
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--theme-primary);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--theme-text-on-primary);
+      font-size: 20px;
+    }
+    .nav {
+      display: none;
+      gap: var(--space-8);
+    }
+    .nav-link {
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      padding: var(--space-2) 0;
+      border-bottom: 2px solid transparent;
+      transition: all var(--transition-fast);
+    }
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color: var(--theme-primary);
+      border-color: var(--theme-primary);
+      outline: none;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      background: var(--theme-bg-elevated);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .theme-toggle-btn:hover {
+      border-color: var(--theme-primary);
+      color: var(--theme-primary);
+    }
+    .mobile-menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: none;
+      color: var(--theme-text-primary);
+      cursor: pointer;
+      border-radius: var(--radius-md);
+    }
+    .mobile-menu-btn:hover { background: var(--theme-bg-elevated); }
+    .mobile-menu-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+    @media (min-width: 768px) {
+      .nav { display: flex; }
+      .mobile-menu-btn { display: none; }
+    }
+
+    /* ============================================================
+       HERO SECTION
+       ============================================================ */
+    .hero {
+      position: relative;
+      padding: var(--space-20) 0 var(--space-16);
+      background: var(--hero-gradient);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--hero-illustration);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-primary);
+      background: var(--theme-primary-light);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-full);
+      margin-bottom: var(--space-6);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font: 700 var(--text-5xl)/var(--leading-tight) var(--font-display);
+      letter-spacing: var(--tracking-tight);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-6);
+    }
+    .hero-subtitle {
+      font: var(--text-lg)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+      margin-bottom: var(--space-10);
+      max-width: 56ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    /* ============================================================
+       SECTION BASE
+       ============================================================ */
+    .section {
+      padding: var(--space-16) 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-12);
+    }
+    .section-tag {
+      display: inline-block;
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-primary);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      margin-bottom: var(--space-3);
+    }
+    .section-title {
+      font: 700 var(--text-4xl)/var(--leading-tight) var(--font-display);
+      letter-spacing: var(--tracking-tight);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-4);
+    }
+    .section-desc {
+      font: var(--text-lg)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+      max-width: 50ch;
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       GIFT GRID
+       ============================================================ */
+    .gift-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    @media (min-width: 400px) {
+      .gift-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .gift-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 1280px) {
+      .gift-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .gift-card {
+      background: var(--theme-bg-card);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: box-shadow var(--transition-base), border-color var(--transition-base), transform var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      animation: cardReveal 400ms ease both;
+    }
+    .gift-card:nth-child(1) { animation-delay: 0ms; }
+    .gift-card:nth-child(2) { animation-delay: 60ms; }
+    .gift-card:nth-child(3) { animation-delay: 120ms; }
+    .gift-card:nth-child(4) { animation-delay: 180ms; }
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .gift-card:hover {
+      box-shadow: var(--elev-3), 0 20px 40px rgba(0, 0, 0, 0.08);
+      border-color: var(--theme-border-strong);
+      transform: translateY(-6px) scale(1.01);
+    }
+    .gift-card:hover .gift-card-image {
+      transform: scale(1.03);
+      transition: transform 500ms var(--ease-standard);
+    }
+    .gift-card-image {
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      width: 100%;
+      background: var(--theme-bg-elevated);
+      transition: transform 400ms var(--ease-standard);
+    }
+    .gift-card-content {
+      padding: var(--space-4);
+    }
+    .gift-card-title {
+      font: 600 var(--text-base) var(--font-display);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-1);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .gift-card-subtitle {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      margin-bottom: var(--space-3);
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .gift-card-preview {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      margin-bottom: var(--space-3);
+      padding-left: var(--space-5);
+      position: relative;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .gift-card-preview::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--theme-bullet);
+      transform: translateY(-50%);
+    }
+    .gift-card-price {
+      font: 700 var(--text-lg) var(--font-display);
+      color: var(--theme-primary);
+    }
+    .gift-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--theme-border);
+      margin-top: auto;
+    }
+    .gift-card-cta {
+      font: 600 var(--text-xs) var(--font-body);
+      color: var(--theme-primary);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      transition: color var(--transition-fast);
+    }
+    .gift-card:hover .gift-card-cta { color: var(--theme-primary-hover); }
+
+    /* ============================================================
+       CATEGORY GRID
+       ============================================================ */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+    @media (min-width: 480px) {
+      .category-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 768px) {
+      .category-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .category-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+    .category-card {
+      display: block;
+      padding: var(--space-6) var(--space-4);
+      text-align: center;
+      background: var(--theme-bg-card);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-lg);
+      transition: all var(--transition-base);
+    }
+    .category-card:hover,
+    .category-card:focus-visible {
+      border-color: var(--theme-primary);
+      box-shadow: var(--elev-2);
+      transform: translateY(-2px);
+      outline: none;
+    }
+    .category-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto var(--space-3);
+      background: var(--theme-primary-light);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--theme-primary);
+      font-size: 24px;
+    }
+    .category-name {
+      font: 600 var(--text-base) var(--font-display);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-1);
+    }
+    .category-type {
+      font: 500 var(--text-xs) var(--font-body);
+      color: var(--theme-text-muted);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+    }
+
+    /* ============================================================
+       NEWSLETTER
+       ============================================================ */
+    .newsletter {
+      background: var(--theme-secondary);
+      border-top: 1px solid var(--theme-border);
+      padding: var(--space-16) 0;
+    }
+    .newsletter-inner {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .newsletter-title {
+      font: 700 var(--text-3xl)/var(--leading-tight) var(--font-display);
+      color: var(--theme-text-on-primary);
+      margin-bottom: var(--space-3);
+    }
+    .newsletter-desc {
+      font: var(--text-base)/var(--leading-relaxed) var(--font-body);
+      color: rgba(255,255,255,0.7);
+      margin-bottom: var(--space-6);
+    }
+    .newsletter-form {
+      display: flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .newsletter-input {
+      flex: 1;
+      min-width: 240px;
+      padding: var(--space-3) var(--space-4);
+      font: var(--text-base) var(--font-body);
+      color: var(--theme-text-on-primary);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: var(--radius-md);
+    }
+    .newsletter-input:focus {
+      outline: none;
+      border-color: var(--theme-text-on-primary);
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+    }
+    .newsletter-input::placeholder { color: rgba(255,255,255,0.5); }
+    .newsletter-btn {
+      padding: var(--space-3) var(--space-6);
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      background: var(--theme-bg-elevated);
+      border-top: 1px solid var(--theme-border);
+      padding: var(--space-12) 0 var(--space-8);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+    @media (min-width: 640px) {
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .footer-grid { grid-template-columns: 2fr repeat(3, 1fr); }
+    }
+    .footer-brand {
+      max-width: 280px;
+    }
+    .footer-logo {
+      font: 700 var(--text-xl) var(--font-display);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-3);
+    }
+    .footer-desc {
+      font: var(--text-sm)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+      margin-bottom: var(--space-4);
+    }
+    .footer-heading {
+      font: 600 var(--text-sm) var(--font-display);
+      color: var(--theme-text-primary);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      margin-bottom: var(--space-4);
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .footer-link {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      transition: color var(--transition-fast);
+    }
+    .footer-link:hover { color: var(--theme-primary); }
+    .footer-bottom {
+      border-top: 1px solid var(--theme-border);
+      margin-top: var(--space-8);
+      padding-top: var(--space-6);
+      text-align: center;
+    }
+    .footer-disclosure {
+      font: var(--text-xs)/var(--leading-normal) var(--font-body);
+      color: var(--theme-disclosure);
+      margin-bottom: var(--space-2);
+    }
+    .footer-copyright {
+      font: var(--text-xs)/var(--leading-normal) var(--font-body);
+      color: var(--theme-text-muted);
+    }
+
+    /* ============================================================
+       MOBILE MENU (Drawer)
+       ============================================================ */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      flex-direction: column;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+    }
+    .mobile-menu-panel {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      background: var(--theme-bg-card);
+      border-left: 1px solid var(--theme-border);
+      padding: var(--space-8) var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+    .mobile-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--theme-border);
+    }
+    .mobile-menu-close {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      color: var(--theme-text-primary);
+      cursor: pointer;
+      border-radius: var(--radius-md);
+    }
+    .mobile-menu-close:hover { background: var(--theme-bg-elevated); }
+    .mobile-nav { display: flex; flex-direction: column; gap: var(--space-1); }
+    .mobile-nav-link {
+      padding: var(--space-3) var(--space-2);
+      font: 500 var(--text-base) var(--font-body);
+      color: var(--theme-text-secondary);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+    }
+    .mobile-nav-link:hover { color: var(--theme-primary); background: var(--theme-primary-light); }
+
+    /* ============================================================
+       LOADING STATES
+       ============================================================ */
+    .skeleton {
+      background: linear-gradient(90deg, var(--theme-bg-elevated) 25%, var(--theme-border) 50%, var(--theme-bg-elevated) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: var(--radius-sm);
+    }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .skeleton-image { aspect-ratio: 16/9; width: 100%; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+    .skeleton-text { height: 1rem; margin-bottom: var(--space-2); }
+    .skeleton-title { height: 1.25rem; width: 80%; }
+    .skeleton-price { height: 1.5rem; width: 60%; background: linear-gradient(90deg, var(--theme-primary-light) 25%, var(--theme-border) 50%, var(--theme-primary-light) 75%); background-size: 200% 100%; }
+
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" role="banner" data-od-id="header">
+    <div class="container header-inner">
+      <a href="/" class="logo" aria-label="GiftKaro Home" data-od-id="logo">
+        <span class="logo-mark" aria-hidden="true">🎁</span>
+        <span>GiftKaro</span>
+      </a>
+      <nav class="nav" role="navigation" aria-label="Main navigation" data-od-id="nav">
+        <a href="category.html?cat=diwali" class="nav-link">Diwali</a>
+        <a href="category.html?cat=christmas" class="nav-link">Christmas</a>
+        <a href="category.html?cat=valentines" class="nav-link">Valentine's</a>
+        <a href="/search" class="nav-link">Browse All</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Switch theme" data-od-id="theme-toggle">
+          <span aria-hidden="true">🎨</span>
+          <span>Theme</span>
+        </button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" data-od-id="menu-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Drawer -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation menu" data-od-id="mobile-menu">
+    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop" data-od-id="mobile-menu-backdrop"></div>
+    <div class="mobile-menu-panel">
+      <div class="mobile-menu-header">
+        <span class="logo" style="font-size: var(--text-lg);">🎁 GiftKaro</span>
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu" data-od-id="mobile-menu-close">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <nav class="mobile-nav" role="navigation" aria-label="Mobile navigation" data-od-id="mobile-nav">
+        <a href="category.html?cat=diwali" class="mobile-nav-link">Diwali Gifts</a>
+        <a href="category.html?cat=christmas" class="mobile-nav-link">Christmas Gifts</a>
+        <a href="category.html?cat=valentines" class="mobile-nav-link">Valentine's Gifts</a>
+        <a href="/search" class="mobile-nav-link">Browse All Gifts</a>
+        <a href="/search?vibe=minimal" class="mobile-nav-link">Minimal Vibes</a>
+        <a href="/search?vibe=luxury" class="mobile-nav-link">Luxury Picks</a>
+        <a href="/search?relationship=parents" class="mobile-nav-link">For Parents</a>
+        <a href="/search?relationship=partner" class="mobile-nav-link">For Partner</a>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" role="main">
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-title" data-od-id="hero">
+      <div class="container hero-content">
+        <span class="hero-badge" data-od-id="hero-badge">
+          <span aria-hidden="true">✨</span>
+          <span id="heroSeasonText">Diwali Collection Live</span>
+        </span>
+        <h1 id="hero-title" class="hero-title" data-od-id="hero-title">Find Thoughtful Gifts They'll Actually Love</h1>
+        <p class="hero-subtitle" data-od-id="hero-subtitle">Curated gift guides for every occasion, festival, and vibe. No endless scrolling — just handpicked picks that feel personal.</p>
+        <div class="hero-cta">
+          <a href="/search" class="btn-primary" data-od-id="hero-cta">Explore Gifts →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- New This Week -->
+    <section class="section" aria-labelledby="new-title" data-od-id="new-section">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-tag" data-od-id="new-tag">New This Week</span>
+          <h2 id="new-title" class="section-title" data-od-id="new-title">Fresh Picks Just In</h2>
+          <p class="section-desc" data-od-id="new-desc">Our editorial team's latest discoveries — from artisan crafts to clever gadgets.</p>
+        </header>
+        <div class="gift-grid" id="newGiftsGrid" role="list" data-od-id="new-grid">
+          <!-- Gift cards rendered by JS -->
+        </div>
+        <div style="text-align: center; margin-top: var(--space-8);" data-od-id="new-view-all">
+          <a href="/search?sort=newest" class="btn-ghost">View All New Arrivals →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Browse by Category -->
+    <section class="section" style="background: var(--theme-bg-card);" aria-labelledby="cat-title" data-od-id="category-section">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-tag" data-od-id="cat-tag">Browse by Category</span>
+          <h2 id="cat-title" class="section-title" data-od-id="cat-title">Find the Perfect Gift</h2>
+          <p class="section-desc" data-od-id="cat-desc">Shop curated collections by festival, occasion, or the vibe you're going for.</p>
+        </header>
+
+        <!-- Festivals -->
+        <div style="margin-bottom: var(--space-16);" data-od-id="cat-festivals">
+          <h3 style="font: 600 var(--text-2xl) var(--font-display); color: var(--theme-text-primary); margin-bottom: var(--space-6); text-align: center;" data-od-id="cat-festivals-title">Festivals</h3>
+          <div class="category-grid" id="festivalsGrid" role="list" data-od-id="festivals-grid">
+            <!-- Category cards rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Occasions -->
+        <div style="margin-bottom: var(--space-16);" data-od-id="cat-occasions">
+          <h3 style="font: 600 var(--text-2xl) var(--font-display); color: var(--theme-text-primary); margin-bottom: var(--space-6); text-align: center;" data-od-id="cat-occasions-title">Occasions</h3>
+          <div class="category-grid" id="occasionsGrid" role="list" data-od-id="occasions-grid">
+            <!-- Category cards rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Vibes -->
+        <div data-od-id="cat-vibes">
+          <h3 style="font: 600 var(--text-2xl) var(--font-display); color: var(--theme-text-primary); margin-bottom: var(--space-6); text-align: center;" data-od-id="cat-vibes-title">Vibes</h3>
+          <div class="category-grid" id="vibesGrid" role="list" data-od-id="vibes-grid">
+            <!-- Category cards rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Newsletter -->
+  <section class="newsletter" aria-labelledby="newsletter-title" data-od-id="newsletter">
+    <div class="container">
+      <div class="newsletter-inner">
+        <h2 id="newsletter-title" class="newsletter-title" data-od-id="newsletter-title">Get Gift Ideas Delivered</h2>
+        <p class="newsletter-desc" data-od-id="newsletter-desc">Weekly curations, seasonal guides, and exclusive finds. No spam, just thoughtful gifting inspiration.</p>
+        <form class="newsletter-form" id="newsletterForm" data-od-id="newsletter-form">
+          <label for="newsletterEmail" class="visually-hidden">Email address</label>
+          <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="Enter your email" aria-label="Email address" required data-od-id="newsletter-input">
+          <button type="submit" class="btn-primary newsletter-btn" data-od-id="newsletter-btn">Subscribe →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo" data-od-id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand" data-od-id="footer-brand">
+          <div class="footer-logo" data-od-id="footer-logo">🎁 GiftKaro</div>
+          <p class="footer-desc" data-od-id="footer-desc">Curated gift discovery for every occasion. We help you find thoughtful, unique gifts — no cart, no checkout, just click through to Amazon.</p>
+        </div>
+        <nav aria-label="Festival gifts" data-od-id="footer-festivals">
+          <h3 class="footer-heading" data-od-id="footer-festivals-title">Festivals</h3>
+          <ul class="footer-links" data-od-id="footer-festivals-links">
+            <li><a href="category.html?cat=diwali" class="footer-link">Diwali</a></li>
+            <li><a href="category.html?cat=christmas" class="footer-link">Christmas</a></li>
+            <li><a href="category.html?cat=valentines" class="footer-link">Valentine's Day</a></li>
+            <li><a href="category.html?cat=holi" class="footer-link">Holi</a></li>
+            <li><a href="category.html?cat=eid" class="footer-link">Eid</a></li>
+            <li><a href="category.html?cat=rakhi" class="footer-link">Raksha Bandhan</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Occasions" data-od-id="footer-occasions">
+          <h3 class="footer-heading" data-od-id="footer-occasions-title">Occasions</h3>
+          <ul class="footer-links" data-od-id="footer-occasions-links">
+            <li><a href="category.html?cat=birthday" class="footer-link">Birthday</a></li>
+            <li><a href="category.html?cat=anniversary" class="footer-link">Anniversary</a></li>
+            <li><a href="category.html?cat=housewarming" class="footer-link">Housewarming</a></li>
+            <li><a href="category.html?cat=wedding" class="footer-link">Wedding</a></li>
+            <li><a href="category.html?cat=baby-shower" class="footer-link">Baby Shower</a></li>
+            <li><a href="category.html?cat=graduation" class="footer-link">Graduation</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Vibes" data-od-id="footer-vibes">
+          <h3 class="footer-heading" data-od-id="footer-vibes-title">Vibes</h3>
+          <ul class="footer-links" data-od-id="footer-vibes-links">
+            <li><a href="/search?vibe=minimal" class="footer-link">Minimal</a></li>
+            <li><a href="/search?vibe=luxury" class="footer-link">Luxury</a></li>
+            <li><a href="/search?vibe=quirky" class="footer-link">Quirky</a></li>
+            <li><a href="/search?vibe=sentimental" class="footer-link">Sentimental</a></li>
+            <li><a href="/search?vibe=eco-friendly" class="footer-link">Eco-Friendly</a></li>
+            <li><a href="/search?vibe=tech" class="footer-link">Tech</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom" data-od-id="footer-bottom">
+        <p class="footer-disclosure" data-od-id="footer-disclosure">As an Amazon Associate, I earn from qualifying purchases</p>
+        <p class="footer-copyright" data-od-id="footer-copyright">© 2026 GiftKaro. Not affiliated with Amazon.in. All product links are affiliate links.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ============================================================
+    // DATA
+    // ============================================================
+    const gifts = [
+      { id: 'g1', title: 'Handcrafted Brass Diya Set', subtitle: 'Set of 4 traditional oil lamps', priceMin: 899, priceMax: 1499, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%23F59E0B" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Brass Diyas</text></svg>', preview: 'Handmade by artisans in Moradabad using traditional techniques', category: 'diwali' },
+      { id: 'g2', title: 'Luxury Christmas Gift Box', subtitle: 'Curated artisanal treats & decor', priceMin: 2499, priceMax: 4999, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%23DC2626" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Christmas Box</text></svg>', preview: 'Premium chocolates, ornaments, and scented candles', category: 'christmas' },
+      { id: 'g3', title: 'Minimalist Leather Journal', subtitle: 'Hand-stitched, refillable pages', priceMin: 1299, priceMax: 1899, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%2364748B" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Leather Journal</text></svg>', preview: 'Full-grain leather, lays flat, includes pen loop', category: 'minimal' },
+      { id: 'g4', title: 'Smart Plant Sensor', subtitle: 'Monitors moisture, light & nutrients', priceMin: 1999, priceMax: 2799, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%2316A34A" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Plant Sensor</text></svg>', preview: 'Bluetooth connectivity, 6-month battery, app alerts', category: 'tech' },
+      { id: 'g5', title: 'Artisan Ceramic Tea Set', subtitle: 'Hand-thrown, 2 cups + pot', priceMin: 1599, priceMax: 2499, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%23E11D48" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Tea Set</text></svg>', preview: 'Food-safe glaze, microwave safe, gift boxed', category: 'sentimental' },
+      { id: 'g6', title: 'Bamboo Wireless Charger', subtitle: '15W fast charge, eco materials', priceMin: 899, priceMax: 1299, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%238FBC8F" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Bamboo Charger</text></svg>', preview: 'Sustainable bamboo, Qi-certified, LED indicator', category: 'eco-friendly' },
+      { id: 'g7', title: 'Custom Star Map Poster', subtitle: 'Night sky from any date/location', priceMin: 999, priceMax: 1799, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%231E293B" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Star Map</text></svg>', preview: 'Archival paper, multiple sizes, framed option', category: 'sentimental' },
+      { id: 'g8', title: 'Gourmet Spice Collection', subtitle: '12 rare spices in magnetic tins', priceMin: 1499, priceMax: 2199, image: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%23EA580C" width="400" height="225"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="system-ui" font-size="18" font-weight="600">Spice Kit</text></svg>', preview: 'Ethically sourced, includes recipe cards', category: 'gourmet' },
+    ];
+
+    const festivalCategories = [
+      { id: 'diwali', name: 'Diwali', icon: '🪔', count: 24 },
+      { id: 'christmas', name: 'Christmas', icon: '🎄', count: 18 },
+      { id: 'valentines', name: "Valentine's", icon: '💝', count: 15 },
+      { id: 'holi', name: 'Holi', icon: '🌈', count: 12 },
+      { id: 'eid', name: 'Eid', icon: '🌙', count: 10 },
+      { id: 'rakhi', name: 'Raksha Bandhan', icon: '🧵', count: 8 },
+      { id: 'navratri', name: 'Navratri', icon: '🕉️', count: 14 },
+      { id: 'onam', name: 'Onam', icon: '🌾', count: 6 },
+      { id: 'pongal', name: 'Pongal', icon: '☀️', count: 5 },
+    ];
+
+    const occasionCategories = [
+      { id: 'birthday', name: 'Birthday', icon: '🎂', count: 42 },
+      { id: 'anniversary', name: 'Anniversary', icon: '💍', count: 28 },
+      { id: 'housewarming', name: 'Housewarming', icon: '🏠', count: 22 },
+      { id: 'wedding', name: 'Wedding', icon: '💒', count: 35 },
+      { id: 'baby-shower', name: 'Baby Shower', icon: '👶', count: 18 },
+      { id: 'graduation', name: 'Graduation', icon: '🎓', count: 15 },
+      { id: 'farewell', name: 'Farewell', icon: '👋', count: 12 },
+      { id: 'promotion', name: 'Promotion', icon: '📈', count: 10 },
+    ];
+
+    const vibeCategories = [
+      { id: 'minimal', name: 'Minimal', icon: '✨', count: 30 },
+      { id: 'luxury', name: 'Luxury', icon: '💎', count: 22 },
+      { id: 'quirky', name: 'Quirky', icon: '🦄', count: 18 },
+      { id: 'sentimental', name: 'Sentimental', icon: '💌', count: 25 },
+      { id: 'practical', name: 'Practical', icon: '🔧', count: 20 },
+      { id: 'eco-friendly', name: 'Eco-Friendly', icon: '🌱', count: 16 },
+      { id: 'tech', name: 'Tech', icon: '🤖', count: 14 },
+      { id: 'wellness', name: 'Wellness', icon: '🧘', count: 12 },
+      { id: 'gourmet', name: 'Gourmet', icon: '🍫', count: 10 },
+    ];
+
+    // ============================================================
+    // RENDER FUNCTIONS
+    // ============================================================
+    function formatPrice(min, max) {
+      return `₹${min.toLocaleString()} – ₹${max.toLocaleString()}`;
+    }
+
+    function renderGiftCard(gift) {
+      return `
+        <article class="gift-card" role="listitem" data-od-id="gift-card-${gift.id}">
+          <img src="${gift.image}" alt="${gift.title}" loading="lazy" class="gift-card-image" data-od-id="gift-img-${gift.id}">
+          <div class="gift-card-content">
+            <h3 class="gift-card-title" data-od-id="gift-title-${gift.id}">${gift.title}</h3>
+            <p class="gift-card-subtitle" data-od-id="gift-subtitle-${gift.id}">${gift.subtitle}</p>
+            <p class="gift-card-preview" data-od-id="gift-preview-${gift.id}">${gift.preview}</p>
+            <div class="gift-card-footer">
+              <span class="gift-card-price" data-od-id="gift-price-${gift.id}">${formatPrice(gift.priceMin, gift.priceMax)}</span>
+              <span class="gift-card-cta">View →</span>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderCategoryCard(cat) {
+      return `
+        <a href="/search?${cat.type}=${cat.id}" class="category-card" role="listitem" data-od-id="cat-${cat.type}-${cat.id}" aria-label="${cat.name} (${cat.count} gifts)">
+          <span class="category-icon" aria-hidden="true">${cat.icon}</span>
+          <h4 class="category-name" data-od-id="cat-name-${cat.type}-${cat.id}">${cat.name}</h4>
+          <span class="category-type" data-od-id="cat-count-${cat.type}-${cat.id}">${cat.count} gifts</span>
+        </a>
+      `;
+    }
+
+    function renderSkeletonCard() {
+      return `
+        <article class="gift-card" aria-hidden="true">
+          <div class="skeleton skeleton-image"></div>
+          <div style="padding: var(--space-4);">
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-text" style="width: 60%;"></div>
+            <div class="skeleton skeleton-text" style="width: 40%; margin-bottom: var(--space-3);"></div>
+            <div class="skeleton skeleton-price"></div>
+          </div>
+        </article>
+      `;
+    }
+
+    // ============================================================
+    // INITIALIZE
+    // ============================================================
+    function init() {
+      // Render new gifts (first 4)
+      const newGrid = document.getElementById('newGiftsGrid');
+      if (newGrid) {
+        newGrid.innerHTML = gifts.slice(0, 4).map(renderGiftCard).join('');
+      }
+
+      // Render category grids
+      const festivalsGrid = document.getElementById('festivalsGrid');
+      if (festivalsGrid) {
+        festivalsGrid.innerHTML = festivalCategories.map(c => renderCategoryCard({...c, type: 'festival'})).join('');
+      }
+
+      const occasionsGrid = document.getElementById('occasionsGrid');
+      if (occasionsGrid) {
+        occasionsGrid.innerHTML = occasionCategories.map(c => renderCategoryCard({...c, type: 'occasion'})).join('');
+      }
+
+      const vibesGrid = document.getElementById('vibesGrid');
+      if (vibesGrid) {
+        vibesGrid.innerHTML = vibeCategories.map(c => renderCategoryCard({...c, type: 'vibe'})).join('');
+      }
+
+      // Update hero badge based on current theme
+      updateHeroBadge();
+
+      // Setup event listeners
+      setupThemeToggle();
+      setupMobileMenu();
+      setupNewsletter();
+      setupSmoothScroll();
+    }
+
+    function updateHeroBadge() {
+      const badge = document.getElementById('heroSeasonText');
+      const theme = document.documentElement.dataset.theme || 'default';
+      const seasonText = {
+        'diwali': 'Diwali Collection Live',
+        'christmas': 'Christmas Collection Live',
+        'valentines': "Valentine's Collection Live",
+        'default': 'New Seasonal Picks'
+      };
+      if (badge) badge.textContent = seasonText[theme] || seasonText.default;
+    }
+
+    function setupThemeToggle() {
+      const toggle = document.getElementById('themeToggle');
+      const themes = ['default', 'diwali', 'christmas', 'valentines'];
+      let currentIndex = themes.indexOf(document.documentElement.dataset.theme || 'default');
+      if (currentIndex === -1) currentIndex = 0;
+
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % themes.length;
+          const theme = themes[currentIndex];
+          document.documentElement.dataset.theme = theme === 'default' ? '' : theme;
+          localStorage.setItem('giftkaro-theme', theme);
+          updateHeroBadge();
+        });
+      }
+    }
+
+    function setupMobileMenu() {
+      const btn = document.getElementById('mobileMenuBtn');
+      const menu = document.getElementById('mobileMenu');
+      const close = document.getElementById('mobileMenuClose');
+      const backdrop = document.getElementById('mobileMenuBackdrop');
+
+      function openMenu() {
+        menu.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMenu() {
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      btn?.addEventListener('click', openMenu);
+      close?.addEventListener('click', closeMenu);
+      backdrop?.addEventListener('click', closeMenu);
+
+      // Close on link click
+      menu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu?.classList.contains('open')) closeMenu();
+      });
+    }
+
+    function setupNewsletter() {
+      const form = document.getElementById('newsletterForm');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const input = form.querySelector('input[type="email"]');
+          const email = input.value.trim();
+          if (email && email.includes('@')) {
+            // Simulate success
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = 'Subscribed!';
+            btn.style.background = 'var(--theme-success)';
+            input.value = '';
+            setTimeout(() => {
+              btn.textContent = originalText;
+              btn.style.background = '';
+            }, 2000);
+          }
+        });
+      }
+    }
+
+    function setupSmoothScroll() {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    }
+
+    // Auto-apply theme on load
+    (function() {
+      const saved = localStorage.getItem('giftkaro-theme');
+      if (saved && saved !== 'default') {
+        document.documentElement.dataset.theme = saved;
+      } else {
+        // Auto-detect seasonal theme
+        const today = new Date();
+        const mmdd = `${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+        let theme = '';
+        if (mmdd >= '10-15' && mmdd <= '11-05') theme = 'diwali';
+        else if (mmdd >= '12-01' && mmdd <= '12-26') theme = 'christmas';
+        else if (mmdd >= '02-01' && mmdd <= '02-15') theme = 'valentines';
+        if (theme) document.documentElement.dataset.theme = theme;
+      }
+      updateHeroBadge();
+    })();
+
+    // Run init when DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  </script>
+</body>
+</html>

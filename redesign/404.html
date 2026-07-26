@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Page not found — GiftKaro">
+  <meta name="theme-color" content="#F59E0B">
+  <title>Page Not Found — GiftKaro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme-tokens.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font: var(--text-base)/var(--leading-normal) var(--font-body);
+      color: var(--theme-text-primary);
+      background: var(--theme-bg-start);
+      min-height: 100vh;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--container-gutter);
+    }
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* HEADER */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--theme-bg-card);
+      border-bottom: 1px solid var(--theme-border);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--header-height);
+      gap: var(--space-4);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font: 700 var(--text-xl) var(--font-display);
+      color: var(--theme-text-primary);
+      letter-spacing: var(--tracking-tight);
+    }
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--theme-primary);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--theme-text-on-primary);
+      font-size: 20px;
+    }
+    .nav {
+      display: none;
+      gap: var(--space-8);
+    }
+    .nav-link {
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      padding: var(--space-2) 0;
+      border-bottom: 2px solid transparent;
+      transition: all var(--transition-fast);
+    }
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color: var(--theme-primary);
+      border-color: var(--theme-primary);
+      outline: none;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      background: var(--theme-bg-elevated);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .theme-toggle-btn:hover {
+      border-color: var(--theme-primary);
+      color: var(--theme-primary);
+    }
+    .mobile-menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: none;
+      color: var(--theme-text-primary);
+      cursor: pointer;
+      border-radius: var(--radius-md);
+    }
+    .mobile-menu-btn:hover { background: var(--theme-bg-elevated); }
+    .mobile-menu-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    @media (min-width: 768px) {
+      .nav { display: flex; }
+      .mobile-menu-btn { display: none; }
+    }
+
+    /* 404 CONTENT */
+    .not-found {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+      padding: var(--space-16) var(--container-gutter);
+      text-align: center;
+    }
+    .not-found-icon {
+      font-size: 80px;
+      margin-bottom: var(--space-6);
+      opacity: 0.6;
+    }
+    .not-found-title {
+      font: 700 var(--text-4xl)/var(--leading-tight) var(--font-display);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-4);
+    }
+    .not-found-subtitle {
+      font: var(--text-lg)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+      margin-bottom: var(--space-8);
+      max-width: 48ch;
+    }
+    .not-found-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4) var(--space-8);
+      font: 600 var(--text-base) var(--font-body);
+      color: var(--theme-text-on-primary);
+      background: var(--theme-primary);
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      text-decoration: none;
+    }
+    .not-found-cta:hover {
+      background: var(--theme-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* SEARCH BAR */
+    .search-container {
+      width: 100%;
+      max-width: 480px;
+      margin-bottom: var(--space-12);
+    }
+    .search-form {
+      display: flex;
+      gap: var(--space-2);
+    }
+    .search-input {
+      flex: 1;
+      padding: var(--space-3) var(--space-5);
+      font: var(--text-base) var(--font-body);
+      color: var(--theme-text-primary);
+      background: var(--theme-bg-card);
+      border: 2px solid var(--theme-border);
+      border-radius: var(--radius-full);
+      transition: all var(--transition-fast);
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--theme-primary);
+      box-shadow: 0 0 0 3px var(--theme-primary-light);
+    }
+    .search-input::placeholder {
+      color: var(--theme-text-tertiary);
+    }
+    .search-btn {
+      padding: var(--space-3) var(--space-6);
+      font: 600 var(--text-sm) var(--font-body);
+      color: var(--theme-text-on-primary);
+      background: var(--theme-primary);
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+    }
+    .search-btn:hover {
+      background: var(--theme-primary-hover);
+    }
+
+    /* POPULAR LINKS */
+    .popular-section {
+      width: 100%;
+      max-width: 640px;
+    }
+    .popular-title {
+      font: 600 var(--text-sm) var(--font-body);
+      color: var(--theme-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      margin-bottom: var(--space-4);
+    }
+    .popular-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-3);
+    }
+    @media (min-width: 480px) {
+      .popular-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .popular-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-3);
+      background: var(--theme-bg-card);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-lg);
+      transition: all var(--transition-fast);
+    }
+    .popular-link:hover {
+      border-color: var(--theme-primary);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .popular-icon {
+      font-size: 24px;
+    }
+    .popular-name {
+      font: 500 var(--text-xs) var(--font-body);
+      color: var(--theme-text-secondary);
+      text-align: center;
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: var(--space-16) 0 var(--space-8);
+      background: var(--theme-bg-card);
+      border-top: 1px solid var(--theme-border);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      margin-bottom: var(--space-12);
+    }
+    @media (min-width: 640px) {
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    }
+    .footer-brand { max-width: 320px; }
+    .footer-logo {
+      font: 700 var(--text-xl) var(--font-display);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-3);
+    }
+    .footer-desc {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      line-height: var(--leading-relaxed);
+    }
+    .footer-heading {
+      font: 600 var(--text-sm) var(--font-body);
+      color: var(--theme-text-primary);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      margin-bottom: var(--space-4);
+    }
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .footer-link {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      transition: color var(--transition-fast);
+    }
+    .footer-link:hover { color: var(--theme-primary); }
+    .footer-bottom {
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--theme-border);
+      text-align: center;
+    }
+    .footer-disclosure {
+      font: var(--text-xs) var(--font-body);
+      color: var(--theme-text-tertiary);
+      margin-bottom: var(--space-2);
+    }
+    .footer-copyright {
+      font: var(--text-xs) var(--font-body);
+      color: var(--theme-text-tertiary);
+    }
+
+    /* MOBILE MENU */
+    .mobile-menu-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+    .mobile-menu-backdrop.open { opacity: 1; }
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 300px;
+      max-width: 85vw;
+      background: var(--theme-bg-card);
+      z-index: 201;
+      transform: translateX(100%);
+      transition: transform var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-6);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-8);
+    }
+    .mobile-menu-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: none;
+      color: var(--theme-text-primary);
+      cursor: pointer;
+      border-radius: var(--radius-md);
+    }
+    .mobile-menu-close:hover { background: var(--theme-bg-elevated); }
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .mobile-nav-link {
+      font: 500 var(--text-base) var(--font-body);
+      color: var(--theme-text-secondary);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+    }
+    .mobile-nav-link:hover {
+      background: var(--theme-bg-elevated);
+      color: var(--theme-primary);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" data-od-id="header">
+    <div class="container header-inner">
+      <a href="homepage.html" class="logo" aria-label="GiftKaro Home" data-od-id="logo">
+        <span class="logo-mark" aria-hidden="true">🎁</span>
+        GiftKaro
+      </a>
+      <nav class="nav" aria-label="Main navigation" data-od-id="main-nav">
+        <a href="search.html" class="nav-link">Search</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Change theme" data-od-id="theme-toggle">Theme</button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" data-od-id="mobile-menu-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-backdrop" id="mobileMenuBackdrop" data-od-id="mobile-menu-backdrop"></div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" data-od-id="mobile-menu">
+    <div class="mobile-menu-header">
+      <span class="logo" style="font-size: var(--text-lg);">
+        <span class="logo-mark" aria-hidden="true" style="width:28px;height:28px;font-size:16px;">🎁</span>
+        GiftKaro
+      </span>
+      <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu" data-od-id="mobile-menu-close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="mobile-nav">
+      <a href="search.html" class="mobile-nav-link">Search</a>
+      <a href="about.html" class="mobile-nav-link">About</a>
+      <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
+      <a href="contact.html" class="mobile-nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- 404 Content -->
+  <main>
+    <section class="not-found" data-od-id="not-found">
+      <div class="not-found-icon" aria-hidden="true">🎁</div>
+      <h1 class="not-found-title" data-od-id="not-found-title">Oops! This gift doesn't exist.</h1>
+      <p class="not-found-subtitle" data-od-id="not-found-subtitle">The page you're looking for might have been moved, removed, or maybe it never existed in the first place.</p>
+
+      <!-- Search Bar -->
+      <div class="search-container" data-od-id="search-container">
+        <form class="search-form" action="search.html" method="get" data-od-id="search-form">
+          <label for="searchInput" class="visually-hidden">Search gifts</label>
+          <input type="text" id="searchInput" name="q" class="search-input" placeholder="Search for gifts..." autocomplete="off" data-od-id="search-input">
+          <button type="submit" class="search-btn" data-od-id="search-btn">Search</button>
+        </form>
+      </div>
+
+      <!-- Popular Links -->
+      <div class="popular-section" data-od-id="popular-section">
+        <p class="popular-title" data-od-id="popular-title">Or explore popular categories</p>
+        <div class="popular-grid" data-od-id="popular-grid">
+          <a href="category.html?cat=diwali" class="popular-link" data-od-id="pop-diwali">
+            <span class="popular-icon" aria-hidden="true">🪔</span>
+            <span class="popular-name">Diwali</span>
+          </a>
+          <a href="category.html?cat=birthday" class="popular-link" data-od-id="pop-birthday">
+            <span class="popular-icon" aria-hidden="true">🎂</span>
+            <span class="popular-name">Birthday</span>
+          </a>
+          <a href="category.html?cat=christmas" class="popular-link" data-od-id="pop-christmas">
+            <span class="popular-icon" aria-hidden="true">🎄</span>
+            <span class="popular-name">Christmas</span>
+          </a>
+          <a href="category.html?cat=valentines" class="popular-link" data-od-id="pop-valentines">
+            <span class="popular-icon" aria-hidden="true">💝</span>
+            <span class="popular-name">Valentine's</span>
+          </a>
+          <a href="category.html?cat=housewarming" class="popular-link" data-od-id="pop-housewarming">
+            <span class="popular-icon" aria-hidden="true">🏠</span>
+            <span class="popular-name">Housewarming</span>
+          </a>
+          <a href="category.html?cat=wedding" class="popular-link" data-od-id="pop-wedding">
+            <span class="popular-icon" aria-hidden="true">💒</span>
+            <span class="popular-name">Wedding</span>
+          </a>
+          <a href="search.html" class="popular-link" data-od-id="pop-all">
+            <span class="popular-icon" aria-hidden="true">✨</span>
+            <span class="popular-name">All Gifts</span>
+          </a>
+          <a href="homepage.html" class="popular-link" data-od-id="pop-home">
+            <span class="popular-icon" aria-hidden="true">🏠</span>
+            <span class="popular-name">Home</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <a href="homepage.html" class="not-found-cta" data-od-id="home-cta">Back to Homepage →</a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo" data-od-id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand" data-od-id="footer-brand">
+          <div class="footer-logo" data-od-id="footer-logo">🎁 GiftKaro</div>
+          <p class="footer-desc" data-od-id="footer-desc">Curated gift discovery for every occasion. We help you find thoughtful, unique gifts — no cart, no checkout, just click through to Amazon.</p>
+        </div>
+        <nav aria-label="Festival gifts" data-od-id="footer-festivals">
+          <h3 class="footer-heading" data-od-id="footer-festivals-title">Festivals</h3>
+          <ul class="footer-links" data-od-id="footer-festivals-links">
+            <li><a href="category.html?cat=diwali" class="footer-link">Diwali</a></li>
+            <li><a href="category.html?cat=christmas" class="footer-link">Christmas</a></li>
+            <li><a href="category.html?cat=valentines" class="footer-link">Valentine's Day</a></li>
+            <li><a href="category.html?cat=holi" class="footer-link">Holi</a></li>
+            <li><a href="category.html?cat=eid" class="footer-link">Eid</a></li>
+            <li><a href="category.html?cat=rakhi" class="footer-link">Raksha Bandhan</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Occasions" data-od-id="footer-occasions">
+          <h3 class="footer-heading" data-od-id="footer-occasions-title">Occasions</h3>
+          <ul class="footer-links" data-od-id="footer-occasions-links">
+            <li><a href="category.html?cat=birthday" class="footer-link">Birthday</a></li>
+            <li><a href="category.html?cat=anniversary" class="footer-link">Anniversary</a></li>
+            <li><a href="category.html?cat=housewarming" class="footer-link">Housewarming</a></li>
+            <li><a href="category.html?cat=wedding" class="footer-link">Wedding</a></li>
+            <li><a href="category.html?cat=baby-shower" class="footer-link">Baby Shower</a></li>
+            <li><a href="category.html?cat=graduation" class="footer-link">Graduation</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Vibes" data-od-id="footer-vibes">
+          <h3 class="footer-heading" data-od-id="footer-vibes-title">Vibes</h3>
+          <ul class="footer-links" data-od-id="footer-vibes-links">
+            <li><a href="search.html?vibe=minimal" class="footer-link">Minimal</a></li>
+            <li><a href="search.html?vibe=luxury" class="footer-link">Luxury</a></li>
+            <li><a href="search.html?vibe=quirky" class="footer-link">Quirky</a></li>
+            <li><a href="search.html?vibe=sentimental" class="footer-link">Sentimental</a></li>
+            <li><a href="search.html?vibe=eco-friendly" class="footer-link">Eco-Friendly</a></li>
+            <li><a href="search.html?vibe=tech" class="footer-link">Tech</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom" data-od-id="footer-bottom">
+        <p class="footer-disclosure" data-od-id="footer-disclosure">As an Amazon Associate, I earn from qualifying purchases</p>
+        <p class="footer-copyright" data-od-id="footer-copyright">© 2026 GiftKaro. Not affiliated with Amazon.in. All product links are affiliate links.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function setupThemeToggle() {
+      const toggle = document.getElementById('themeToggle');
+      const themes = ['default', 'diwali', 'christmas', 'valentines'];
+      let currentIndex = themes.indexOf(document.documentElement.dataset.theme || 'default');
+      if (currentIndex === -1) currentIndex = 0;
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % themes.length;
+          const theme = themes[currentIndex];
+          document.documentElement.dataset.theme = theme === 'default' ? '' : theme;
+          localStorage.setItem('giftkaro-theme', theme);
+        });
+      }
+    }
+
+    function setupMobileMenu() {
+      const btn = document.getElementById('mobileMenuBtn');
+      const menu = document.getElementById('mobileMenu');
+      const close = document.getElementById('mobileMenuClose');
+      const backdrop = document.getElementById('mobileMenuBackdrop');
+      function openMenu() {
+        menu.classList.add('open');
+        backdrop.classList.add('open');
+        backdrop.style.display = 'block';
+        btn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMenu() {
+        menu.classList.remove('open');
+        backdrop.classList.remove('open');
+        backdrop.style.display = '';
+        btn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+      btn?.addEventListener('click', openMenu);
+      close?.addEventListener('click', closeMenu);
+      backdrop?.addEventListener('click', closeMenu);
+      menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu?.classList.contains('open')) closeMenu();
+      });
+    }
+
+    (function() {
+      const saved = localStorage.getItem('giftkaro-theme');
+      if (saved && saved !== 'default') {
+        document.documentElement.dataset.theme = saved;
+      } else {
+        const today = new Date();
+        const mmdd = `${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+        let theme = '';
+        if (mmdd >= '10-15' && mmdd <= '11-05') theme = 'diwali';
+        else if (mmdd >= '12-01' && mmdd <= '12-26') theme = 'christmas';
+        else if (mmdd >= '02-01' && mmdd <= '02-15') theme = 'valentines';
+        if (theme) document.documentElement.dataset.theme = theme;
+      }
+      setupThemeToggle();
+      setupMobileMenu();
+    })();
+  </script>
+</body>
+</html>

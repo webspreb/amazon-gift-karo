@@ -1,9 +1,12 @@
 import { GiftEntry } from './types';
+import staticGifts from './gifts-data.json';
 
-const giftRegistry: GiftEntry[] = [];
+const giftRegistry: GiftEntry[] = [...(staticGifts as GiftEntry[])];
 
 export function registerGift(gift: GiftEntry): void {
-  giftRegistry.push(gift);
+  if (!giftRegistry.some(g => g.slug === gift.slug)) {
+    giftRegistry.push(gift);
+  }
 }
 
 export function getAllGifts(): GiftEntry[] {

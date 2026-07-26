@@ -1,0 +1,93 @@
+[
+  {
+    "slug": "aromatherapy-candle-collection",
+    "title": "Aromatherapy Candle Collection — Set the Mood",
+    "description": "A hand-poured set of soy wax candles infused with lavender, vanilla, and sandalwood. Perfect for creating a cozy, romantic atmosphere.",
+    "priceRange": "₹600 – ₹1,200",
+    "imageUrl": "/images/candle-set.jpg",
+    "amazonLink": "https://amazon.in/dp/XXXX",
+    "categories": {
+      "festivals": [],
+      "occasions": [
+        "valentines",
+        "anniversary"
+      ],
+      "relationships": [
+        "for-couple",
+        "for-spouse"
+      ],
+      "vibes": [
+        "romantic",
+        "sentimental",
+        "luxury"
+      ]
+    },
+    "publishedDate": "2026-07-15",
+    "whyItsGreat": [
+      "Made from natural soy wax with essential oils",
+      "Long-lasting burn time of 40+ hours each",
+      "Comes in a reusable gift tin",
+      "Hand-poured in small batches for quality"
+    ]
+  },
+  {
+    "slug": "custom-photo-collage-frame",
+    "title": "Custom Photo Collage Frame — Cherish Every Moment",
+    "description": "A personalized multi-photo collage frame that beautifully captures your most cherished memories. Ideal for anniversaries and romantic milestones.",
+    "priceRange": "₹800 – ₹1,500",
+    "imageUrl": "/images/photo-frame.jpg",
+    "amazonLink": "https://amazon.in/dp/XXXX",
+    "categories": {
+      "festivals": [],
+      "occasions": [
+        "anniversary",
+        "valentines"
+      ],
+      "relationships": [
+        "for-couple",
+        "for-spouse"
+      ],
+      "vibes": [
+        "romantic",
+        "sentimental"
+      ]
+    },
+    "publishedDate": "2026-07-10",
+    "whyItsGreat": [
+      "Fully customizable with your own photos",
+      "High-quality matte finish frame",
+      "Includes elegant gift wrapping",
+      "A timeless keepsake for years to come"
+    ]
+  },
+  {
+    "slug": "terracotta-tea-set",
+    "title": "Terracotta Tea Set — Handcrafted in Jaipur",
+    "description": "A beautiful handcrafted terracotta tea set that brings the warmth of Rajasthan to any home. Perfect for Diwali gatherings.",
+    "priceRange": "₹1,200 – ₹1,800",
+    "imageUrl": "/images/tea-set.jpg",
+    "amazonLink": "https://amazon.in/dp/XXXX",
+    "categories": {
+      "festivals": [
+        "diwali"
+      ],
+      "occasions": [
+        "housewarming"
+      ],
+      "relationships": [
+        "for-parents",
+        "for-couple"
+      ],
+      "vibes": [
+        "traditional",
+        "sentimental"
+      ]
+    },
+    "publishedDate": "2026-07-01",
+    "whyItsGreat": [
+      "Handcrafted by artisans from Jaipur",
+      "Eco-friendly and unique",
+      "Comes in a beautiful gift box"
+    ]
+  }
+]

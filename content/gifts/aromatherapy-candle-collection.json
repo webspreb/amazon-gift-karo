@@ -1,0 +1,21 @@
+{
+  "slug": "aromatherapy-candle-collection",
+  "title": "Aromatherapy Candle Collection — Set the Mood",
+  "description": "A hand-poured set of soy wax candles infused with lavender, vanilla, and sandalwood. Perfect for creating a cozy, romantic atmosphere.",
+  "priceRange": "₹600 – ₹1,200",
+  "imageUrl": "/images/candle-set.jpg",
+  "amazonLink": "https://amazon.in/dp/XXXX",
+  "categories": {
+    "festivals": [],
+    "occasions": ["valentines", "anniversary"],
+    "relationships": ["for-couple", "for-spouse"],
+    "vibes": ["romantic", "sentimental", "luxury"]
+  },
+  "publishedDate": "2026-07-15",
+  "whyItsGreat": [
+    "Made from natural soy wax with essential oils",
+    "Long-lasting burn time of 40+ hours each",
+    "Comes in a reusable gift tin",
+    "Hand-poured in small batches for quality"
+  ]
+}

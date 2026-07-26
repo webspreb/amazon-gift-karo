@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Handcrafted Brass Diya Set — Curated by GiftKaro. A thoughtful Diwali gift with artisan craftsmanship.">
+  <title>Handcrafted Brass Diya Set — GiftKaro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme-tokens.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font: var(--text-base)/var(--leading-normal) var(--font-body);
+      color: var(--theme-text-primary);
+      background: var(--theme-bg-start);
+      min-height: 100vh;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--container-gutter);
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--theme-bg-card);
+      border-bottom: 1px solid var(--theme-border);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--header-height);
+      gap: var(--space-4);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font: 700 var(--text-xl) var(--font-display);
+      color: var(--theme-text-primary);
+      letter-spacing: var(--tracking-tight);
+    }
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--theme-primary);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--theme-text-on-primary);
+      font-size: 20px;
+    }
+    .nav {
+      display: none;
+      gap: var(--space-8);
+    }
+    .nav-link {
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      padding: var(--space-2) 0;
+      border-bottom: 2px solid transparent;
+      transition: all var(--transition-fast);
+    }
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color: var(--theme-primary);
+      border-color: var(--theme-primary);
+      outline: none;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .mobile-menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: none;
+      color: var(--theme-text-primary);
+      cursor: pointer;
+      border-radius: var(--radius-md);
+    }
+    .mobile-menu-btn:hover { background: var(--theme-bg-elevated); }
+    @media (min-width: 768px) {
+      .nav { display: flex; }
+      .mobile-menu-btn { display: none; }
+    }
+
+    /* ============================================================
+       BREADCRUMB
+       ============================================================ */
+    .breadcrumb {
+      padding: var(--space-4) 0;
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-muted);
+    }
+    .breadcrumb a {
+      color: var(--theme-text-secondary);
+      transition: color var(--transition-fast);
+    }
+    .breadcrumb a:hover { color: var(--theme-primary); }
+    .breadcrumb-sep { margin: 0 var(--space-2); }
+
+    /* ============================================================
+       GIFT DETAIL LAYOUT
+       ============================================================ */
+    .gift-detail {
+      padding: var(--space-6) 0 var(--space-16);
+    }
+    .gift-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+    @media (min-width: 768px) {
+      .gift-detail-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-10);
+      }
+    }
+    @media (min-width: 960px) {
+      .gift-detail-grid {
+        grid-template-columns: 6fr 4fr;
+        gap: var(--space-12);
+      }
+    }
+
+    /* ============================================================
+       PRODUCT IMAGE
+       ============================================================ */
+    .product-image-wrap {
+      position: relative;
+      overflow: hidden;
+      background: var(--theme-bg-card);
+      border: 1px solid var(--theme-border);
+    }
+    .product-image {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      display: block;
+      background: var(--theme-bg-elevated);
+    }
+    .product-tag {
+      position: absolute;
+      top: var(--space-4);
+      left: var(--space-4);
+      padding: var(--space-1) var(--space-3);
+      font: 600 var(--text-xs) var(--font-body);
+      color: var(--theme-text-on-primary);
+      background: var(--theme-primary);
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+    }
+
+    /* ============================================================
+       CONTENT PANEL
+       ============================================================ */
+    .content-panel {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+    .gift-meta {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .gift-title {
+      font: 700 var(--text-3xl)/var(--leading-tight) var(--font-display);
+      letter-spacing: var(--tracking-tight);
+      color: var(--theme-text-primary);
+    }
+    .gift-subtitle {
+      font: 500 var(--text-base) var(--font-body);
+      color: var(--theme-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+    }
+    .price-range {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      background: var(--theme-primary-light);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-full);
+      font: 600 var(--text-lg) var(--font-display);
+      color: var(--theme-primary);
+      width: fit-content;
+    }
+    .price-range-label {
+      font: 400 var(--text-sm) var(--font-body);
+      color: var(--theme-text-muted);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+    }
+
+    .gift-description {
+      font: var(--text-base)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       WHY IT'S GREAT
+       ============================================================ */
+    .why-section {
+      padding: var(--space-5);
+      background: var(--theme-bg-elevated);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-lg);
+    }
+    .why-heading {
+      font: 700 var(--text-base) var(--font-display);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-4);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+    }
+    .why-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .why-list li {
+      position: relative;
+      padding-left: var(--space-6);
+      margin-bottom: var(--space-3);
+      font: var(--text-sm)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+    }
+    .why-list li:last-child { margin-bottom: 0; }
+    .why-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--theme-bullet);
+      transform: translateY(-50%);
+    }
+
+    /* ============================================================
+       AMAZON CTA
+       ============================================================ */
+    .amazon-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .amazon-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      width: 100%;
+      padding: var(--space-4) var(--space-6);
+      background: var(--theme-cta-bg);
+      color: var(--theme-cta-text);
+      border: none;
+      border-radius: 2px;
+      font: 600 var(--text-lg) var(--font-body);
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast);
+      text-decoration: none;
+      text-align: center;
+      min-height: 52px;
+    }
+    .amazon-cta:hover {
+      background: var(--theme-cta-hover);
+      transform: translateY(-1px);
+    }
+    .amazon-cta:active { transform: scale(0.98); }
+    .amazon-cta:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+    .amazon-cta-icon {
+      font-size: 18px;
+    }
+    .affiliate-disclosure-inline {
+      font: var(--text-xs)/var(--leading-normal) var(--font-body);
+      color: var(--theme-disclosure);
+      text-align: center;
+      margin-top: var(--space-1);
+    }
+
+    /* ============================================================
+       RELATED GIFTS
+       ============================================================ */
+    .related-section {
+      padding: var(--space-16) 0;
+      border-top: 1px solid var(--theme-border);
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-10);
+    }
+    .section-tag {
+      display: inline-block;
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-primary);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      margin-bottom: var(--space-3);
+    }
+    .section-title {
+      font: 700 var(--text-3xl)/var(--leading-tight) var(--font-display);
+      letter-spacing: var(--tracking-tight);
+      color: var(--theme-text-primary);
+    }
+
+    .gift-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    @media (min-width: 400px) {
+      .gift-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .gift-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .gift-card {
+      background: var(--theme-bg-card);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: box-shadow var(--transition-base), border-color var(--transition-base), transform var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      animation: cardReveal 400ms ease both;
+    }
+    .gift-card:nth-child(1) { animation-delay: 0ms; }
+    .gift-card:nth-child(2) { animation-delay: 60ms; }
+    .gift-card:nth-child(3) { animation-delay: 120ms; }
+    .gift-card:nth-child(4) { animation-delay: 180ms; }
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .gift-card:hover {
+      box-shadow: var(--elev-3), 0 20px 40px rgba(0, 0, 0, 0.08);
+      border-color: var(--theme-border-strong);
+      transform: translateY(-6px) scale(1.01);
+    }
+    .gift-card:hover .gift-card-image {
+      transform: scale(1.03);
+      transition: transform 500ms var(--ease-standard);
+    }
+    .gift-card-image {
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      width: 100%;
+      background: var(--theme-bg-elevated);
+      transition: transform 400ms var(--ease-standard);
+    }
+    .gift-card-content {
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .gift-card-title {
+      font: 600 var(--text-sm) var(--font-display);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-1);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .gift-card-subtitle {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      margin-bottom: var(--space-2);
+    }
+    .gift-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--theme-border);
+      margin-top: auto;
+    }
+    .gift-card-price {
+      font: 600 var(--text-sm) var(--font-display);
+      color: var(--theme-primary);
+    }
+    .gift-card-cta {
+      font: 600 var(--text-xs) var(--font-body);
+      color: var(--theme-primary);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      transition: color var(--transition-fast);
+    }
+    .gift-card:hover .gift-card-cta { color: var(--theme-primary-hover); }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      background: var(--theme-secondary);
+      color: var(--theme-text-on-primary);
+      padding: var(--space-12) 0 var(--space-6);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+    @media (min-width: 768px) {
+      .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    }
+    .footer-brand { max-width: 300px; }
+    .footer-brand-name {
+      font: 700 var(--text-xl) var(--font-display);
+      margin-bottom: var(--space-3);
+    }
+    .footer-brand-desc {
+      font: var(--text-sm)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-muted);
+    }
+    .footer-col-title {
+      font: 600 var(--text-sm) var(--font-body);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      margin-bottom: var(--space-4);
+      color: var(--theme-text-muted);
+    }
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .footer-links a {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-on-primary);
+      opacity: 0.8;
+      transition: opacity var(--transition-fast);
+    }
+    .footer-links a:hover { opacity: 1; }
+    .footer-bottom {
+      padding-top: var(--space-6);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+    .footer-disclosure {
+      font: var(--text-xs)/var(--leading-normal) var(--font-body);
+      color: var(--theme-text-muted);
+    }
+
+    /* ============================================================
+       MOBILE MENU
+       ============================================================ */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+    }
+    .mobile-menu.open { display: flex; justify-content: flex-end; }
+    .mobile-menu-panel {
+      width: 280px;
+      max-width: 85vw;
+      height: 100%;
+      background: var(--theme-bg-card);
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+      overflow-y: auto;
+    }
+    .mobile-menu-close {
+      align-self: flex-end;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: none;
+      color: var(--theme-text-primary);
+      cursor: pointer;
+      border-radius: var(--radius-md);
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .mobile-nav-links a {
+      font: 500 var(--text-lg) var(--font-body);
+      color: var(--theme-text-primary);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--theme-border);
+    }
+
+    /* ============================================================
+       SKELETON LOADING
+       ============================================================ */
+    .skeleton {
+      background: linear-gradient(90deg, var(--theme-bg-elevated) 25%, var(--theme-border) 50%, var(--theme-bg-elevated) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: var(--radius-sm);
+    }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .skeleton-image { aspect-ratio: 4/5; width: 100%; border-radius: var(--radius-lg); }
+    .skeleton-text { height: 1rem; margin-bottom: var(--space-2); }
+    .skeleton-title { height: 1.5rem; width: 80%; }
+    .skeleton-price { height: 2rem; width: 40%; background: linear-gradient(90deg, var(--theme-primary-light) 25%, var(--theme-border) 50%, var(--theme-primary-light) 75%); background-size: 200% 100%; }
+
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" data-od-id="site-header">
+    <div class="container header-inner">
+      <a href="homepage.html" class="logo" data-od-id="logo">
+        <span class="logo-mark">G</span>
+        <span>GiftKaro</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="homepage.html" class="nav-link">Home</a>
+        <a href="search.html" class="nav-link">Search</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+      </nav>
+      <div class="header-actions">
+        <a href="search.html" class="btn-ghost" style="padding:8px 16px; font-size:14px;" data-od-id="search-nav-btn">Search</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" data-od-id="mobile-menu-btn">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu" data-od-id="mobile-menu">
+    <div class="mobile-menu-panel">
+      <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">&times;</button>
+      <nav class="mobile-nav-links">
+        <a href="homepage.html">Home</a>
+        <a href="search.html">Search</a>
+        <a href="about.html">About</a>
+        <a href="how-it-works.html">How It Works</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Breadcrumb -->
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb" data-od-id="breadcrumb">
+      <a href="homepage.html">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="search.html?occasion=diwali">Diwali</a>
+      <span class="breadcrumb-sep">/</span>
+      <span>Handcrafted Brass Diya Set</span>
+    </nav>
+  </div>
+
+  <!-- Gift Detail -->
+  <main class="gift-detail">
+    <div class="container">
+      <div class="gift-detail-grid">
+        <!-- Product Image -->
+        <div class="product-image-wrap" data-od-id="product-image">
+          <div style="width:100%;aspect-ratio:4/5;background:linear-gradient(135deg, var(--theme-bg-start), var(--theme-bg-end));display:flex;align-items:center;justify-content:center;position:relative;">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M60 20 L65 50 L60 45 L55 50 Z" fill="var(--theme-primary)" opacity="0.3"/>
+              <ellipse cx="60" cy="65" rx="25" ry="8" fill="var(--theme-primary)" opacity="0.15"/>
+              <path d="M35 65 L60 30 L85 65 L75 65 L60 42 L45 65 Z" fill="var(--theme-primary)" opacity="0.2"/>
+              <circle cx="60" cy="30" r="4" fill="var(--theme-primary)" opacity="0.4"/>
+              <path d="M42 70 Q60 85 78 70" stroke="var(--theme-primary)" stroke-width="1.5" fill="none" opacity="0.2"/>
+              <rect x="30" y="72" width="60" height="4" rx="2" fill="var(--theme-primary)" opacity="0.1"/>
+            </svg>
+            <span class="product-tag">New This Week</span>
+          </div>
+        </div>
+
+        <!-- Content Panel -->
+        <div class="content-panel">
+          <div class="gift-meta" data-od-id="gift-meta">
+            <span class="gift-subtitle">Diwali Essentials</span>
+            <h1 class="gift-title">Handcrafted Brass Diya Set</h1>
+            <div class="price-range">
+              <span class="price-range-label">Price Range</span>
+              ₹899 – ₹1,499
+            </div>
+          </div>
+
+          <p class="gift-description" data-od-id="gift-description">
+            Elevate your festive decor with these artisan-crafted brass diyas. Each piece is hand-hammered by skilled artisans in Moradabad using techniques passed down through generations. The solid brass construction ensures durability and a warm, golden glow that transforms any space into a festive sanctuary.
+          </p>
+
+          <div class="why-section" data-od-id="why-its-great">
+            <h2 class="why-heading">Why It's Great</h2>
+            <ul class="why-list">
+              <li>Handmade by artisans in Moradabad using traditional techniques</li>
+              <li>Solid brass construction — no hollow bases that tip over</li>
+              <li>Perfect size for rangoli centerpieces or doorway placement</li>
+              <li>Comes in a reusable gift box with velvet lining</li>
+            </ul>
+          </div>
+
+          <div class="amazon-cta-wrap" data-od-id="amazon-cta">
+            <a href="https://www.amazon.in/dp/B09XYZ1234?tag=giftkaro-21"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="amazon-cta">
+              <span>View on Amazon</span>
+              <span class="amazon-cta-icon">→</span>
+            </a>
+            <p class="affiliate-disclosure-inline">
+              As an Amazon Associate, I earn from qualifying purchases
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Related Gifts -->
+  <section class="related-section" data-od-id="related-gifts">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">You Might Also Like</span>
+        <h2 class="section-title">Related Gifts</h2>
+      </div>
+      <div class="gift-grid">
+        <a href="#" class="gift-card" data-od-id="related-card-1">
+          <div style="aspect-ratio:16/9;background:linear-gradient(135deg, #FEF3C7, #FDE68A);display:flex;align-items:center;justify-content:center;">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="15" y="20" width="30" height="25" rx="2" fill="var(--theme-primary)" opacity="0.2"/><path d="M20 20 L30 10 L40 20" stroke="var(--theme-primary)" stroke-width="1.5" fill="none" opacity="0.3"/></svg>
+          </div>
+          <div class="gift-card-content">
+            <h3 class="gift-card-title">Decorative Rangoli Powder Set</h3>
+            <p class="gift-card-subtitle">Vibrant colors for festive floors</p>
+            <div class="gift-card-footer">
+              <span class="gift-card-price">₹349 – ₹699</span>
+              <span class="gift-card-cta">View →</span>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="gift-card" data-od-id="related-card-2">
+          <div style="aspect-ratio:16/9;background:linear-gradient(135deg, #FFF7ED, #FED7AA);display:flex;align-items:center;justify-content:center;">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="28" r="12" fill="var(--theme-primary)" opacity="0.15"/><path d="M22 40 Q30 50 38 40" stroke="var(--theme-primary)" stroke-width="1.5" fill="none" opacity="0.2"/></svg>
+          </div>
+          <div class="gift-card-content">
+            <h3 class="gift-card-title">Premium Dry Fruit Box</h3>
+            <p class="gift-card-subtitle">Curated selection in gold packaging</p>
+            <div class="gift-card-footer">
+              <span class="gift-card-price">₹799 – ₹1,999</span>
+              <span class="gift-card-cta">View →</span>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="gift-card" data-od-id="related-card-3">
+          <div style="aspect-ratio:16/9;background:linear-gradient(135deg, #FEF3C7, #FEF3C7);display:flex;align-items:center;justify-content:center;">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="18" y="15" width="24" height="30" rx="2" fill="var(--theme-primary)" opacity="0.15"/><line x1="22" y1="22" x2="38" y2="22" stroke="var(--theme-primary)" stroke-width="1" opacity="0.2"/><line x1="22" y1="28" x2="38" y2="28" stroke="var(--theme-primary)" stroke-width="1" opacity="0.2"/><line x1="22" y1="34" x2="34" y2="34" stroke="var(--theme-primary)" stroke-width="1" opacity="0.2"/></svg>
+          </div>
+          <div class="gift-card-content">
+            <h3 class="gift-card-title">Artisan Chocolate Gift Tray</h3>
+            <p class="gift-card-subtitle">12-piece handcrafted collection</p>
+            <div class="gift-card-footer">
+              <span class="gift-card-price">₹599 – ₹1,299</span>
+              <span class="gift-card-cta">View →</span>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="gift-card" data-od-id="related-card-4">
+          <div style="aspect-ratio:16/9;background:linear-gradient(135deg, #FFF7ED, #FDE68A);display:flex;align-items:center;justify-content:center;">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="15" fill="var(--theme-primary)" opacity="0.1"/><circle cx="30" cy="30" r="8" fill="var(--theme-primary)" opacity="0.15"/><circle cx="30" cy="30" r="2" fill="var(--theme-primary)" opacity="0.3"/></svg>
+          </div>
+          <div class="gift-card-content">
+            <h3 class="gift-card-title">Scented Candle Trio</h3>
+            <p class="gift-card-subtitle">Sandalwood, jasmine & rose</p>
+            <div class="gift-card-footer">
+              <span class="gift-card-price">₹449 – ₹899</span>
+              <span class="gift-card-cta">View →</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" data-od-id="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-brand-name">GiftKaro</div>
+          <p class="footer-brand-desc">Curated gift discovery for every occasion. Thoughtful picks, not endless scrolling.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Festivals</h4>
+          <ul class="footer-links">
+            <li><a href="category.html?cat=diwali">Diwali</a></li>
+            <li><a href="category.html?cat=christmas">Christmas</a></li>
+            <li><a href="category.html?cat=eid">Eid</a></li>
+            <li><a href="category.html?cat=rakhi">Rakhi</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Occasions</h4>
+          <ul class="footer-links">
+            <li><a href="category.html?cat=birthday">Birthday</a></li>
+            <li><a href="category.html?cat=anniversary">Anniversary</a></li>
+            <li><a href="category.html?cat=housewarming">Housewarming</a></li>
+            <li><a href="category.html?cat=wedding">Wedding</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">About</h4>
+          <ul class="footer-links">
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="privacy.html">Privacy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-disclosure">As an Amazon Associate, I earn from qualifying purchases.</p>
+        <p class="footer-disclosure" style="margin-top:var(--space-2)">&copy; 2026 GiftKaro. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme switching
+    (function() {
+      const saved = localStorage.getItem('giftkaro-theme');
+      if (saved && saved !== 'default') {
+        document.documentElement.dataset.theme = saved;
+      } else {
+        const today = new Date();
+        const mmdd = String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+        let theme = '';
+        if (mmdd >= '10-15' && mmdd <= '11-05') theme = 'diwali';
+        else if (mmdd >= '12-01' && mmdd <= '12-26') theme = 'christmas';
+        else if (mmdd >= '02-01' && mmdd <= '02-15') theme = 'valentines';
+        if (theme) document.documentElement.dataset.theme = theme;
+      }
+    })();
+
+    // Mobile menu
+    (function() {
+      const btn = document.getElementById('mobileMenuBtn');
+      const menu = document.getElementById('mobileMenu');
+      const close = document.getElementById('mobileMenuClose');
+      function openMenu() { menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+      function closeMenu() { menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+      btn?.addEventListener('click', openMenu);
+      close?.addEventListener('click', closeMenu);
+      menu?.addEventListener('click', function(e) { if (e.target === menu) closeMenu(); });
+      menu?.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && menu?.classList.contains('open')) closeMenu(); });
+    })();
+  </script>
+</body>
+</html>

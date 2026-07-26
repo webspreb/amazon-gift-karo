@@ -1,3 +1,5 @@
+'use client';
+
 import { GiftEntry } from '@/lib/types';
 import Link from 'next/link';
 
@@ -6,42 +8,47 @@ interface GiftCardProps {
 }
 
 export function GiftCard({ gift }: GiftCardProps) {
-  const categoryTags = [
-    ...(gift.categories.vibes ?? []).slice(0, 2),
-  ];
+  // Format subtitle from vibes or occasions
+  const vibes = gift.categories.vibes || [];
+  const occasions = gift.categories.occasions || [];
+  const subtitle = vibes.length > 0
+    ? vibes.map(v => v.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')).join(' · ')
+    : occasions.map(o => o.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')).join(' · ');
+
+  // Take the first reason in "Why It's Great" as the preview line
+  const preview = gift.whyItsGreat?.[0] || gift.description;
 
   return (
-    <div className="group rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md overflow-hidden">
-      <div className="aspect-square bg-gray-100 relative overflow-hidden">
-        <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-          {gift.title.charAt(0)}
-        </div>
-      </div>
-      <div className="p-4 space-y-2">
-        <div className="flex flex-wrap gap-1.5">
-          {categoryTags.map(tag => (
-            <span key={tag} className="inline-block rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-medium text-amber-700 capitalize">
-              {tag}
-            </span>
-          ))}
-        </div>
-        <h3 className="font-semibold text-gray-900 line-clamp-2 group-hover:text-amber-600 transition-colors">
-          <Link href={`/gift/${gift.slug}`}>
-            {gift.title}
-          </Link>
+    <Link
+      href={`/gift/${gift.slug}`}
+      className="gift-card"
+      role="listitem"
+      data-od-id={`gift-card-${gift.slug}`}
+    >
+      <img
+        src={gift.imageUrl || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"><rect fill="%23FAFAFA" width="400" height="225"/></svg>'}
+        alt={gift.title}
+        loading="lazy"
+        className="gift-card-image"
+        data-od-id={`gift-img-${gift.slug}`}
+      />
+      <div className="gift-card-content">
+        <h3 className="gift-card-title" data-od-id={`gift-title-${gift.slug}`}>
+          {gift.title}
         </h3>
-        <p className="text-sm text-gray-500 line-clamp-2">{gift.description}</p>
-        <p className="text-sm font-medium text-gray-700">{gift.priceRange}</p>
-        <a
-          href={gift.amazonLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 inline-flex w-full items-center justify-center rounded-lg bg-amber-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-600"
-          onClick={(e) => e.stopPropagation()}
-        >
-          View on Amazon →
-        </a>
+        <p className="gift-card-subtitle" data-od-id={`gift-subtitle-${gift.slug}`}>
+          {subtitle}
+        </p>
+        <p className="gift-card-preview" data-od-id={`gift-preview-${gift.slug}`}>
+          {preview}
+        </p>
+        <div className="gift-card-footer">
+          <span className="gift-card-price" data-od-id={`gift-price-${gift.slug}`}>
+            {gift.priceRange}
+          </span>
+          <span className="gift-card-cta">View →</span>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }

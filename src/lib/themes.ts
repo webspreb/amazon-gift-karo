@@ -31,7 +31,7 @@ export const seasons: SeasonTheme[] = [
     },
   },
   {
-    key: 'valentine',
+    key: 'valentines',
     label: "Valentine's",
     startMonth: 2, startDay: 1,
     endMonth: 2, endDay: 15,

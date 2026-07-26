@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GiftKaro — Component Library & Style Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme-tokens.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font: var(--text-base)/var(--leading-normal) var(--font-body);
+      color: var(--theme-text-primary);
+      background: var(--theme-bg-start);
+      min-height: 100vh;
+    }
+    .doc {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: var(--space-12) var(--container-gutter);
+    }
+    .doc-header {
+      text-align: center;
+      padding: var(--space-16) 0 var(--space-12);
+      border-bottom: 1px solid var(--theme-border);
+      margin-bottom: var(--space-16);
+    }
+    .doc-title {
+      font: 700 var(--text-5xl)/var(--leading-tight) var(--font-display);
+      letter-spacing: var(--tracking-tight);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-4);
+    }
+    .doc-subtitle {
+      font: var(--text-lg)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+      max-width: 60ch;
+      margin: 0 auto;
+    }
+    .section {
+      margin-bottom: var(--space-20);
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: var(--space-8);
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+    .section-title {
+      font: 600 var(--text-3xl)/var(--leading-tight) var(--font-display);
+      letter-spacing: var(--tracking-tight);
+      color: var(--theme-text-primary);
+    }
+    .section-desc {
+      font: var(--text-base)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+      max-width: 50ch;
+      margin-top: var(--space-2);
+    }
+    .theme-toggle {
+      display: flex;
+      gap: var(--space-2);
+      padding: var(--space-2);
+      background: var(--theme-bg-card);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-lg);
+    }
+    .theme-btn {
+      padding: var(--space-2) var(--space-4);
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .theme-btn:hover { color: var(--theme-text-primary); }
+    .theme-btn.active {
+      background: var(--theme-primary);
+      color: var(--theme-text-on-primary);
+    }
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--space-6);
+    }
+    .component-card {
+      background: var(--theme-bg-card);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      transition: box-shadow var(--transition-base), border-color var(--transition-base);
+    }
+    .component-card:hover {
+      box-shadow: var(--elev-2);
+      border-color: var(--theme-border-strong);
+    }
+    .component-name {
+      font: 600 var(--text-lg) var(--font-display);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-2);
+    }
+    .component-desc {
+      font: var(--text-sm)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+      margin-bottom: var(--space-4);
+    }
+    .component-preview {
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      background: var(--theme-bg-elevated);
+    }
+    .preview-label {
+      font: 500 var(--text-xs)/var(--leading-normal) var(--font-body);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      color: var(--theme-text-muted);
+      margin-bottom: var(--space-3);
+    }
+    /* Button variants in preview */
+    .btn-row { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+    .btn-sm { padding: var(--space-2) var(--space-4); font-size: var(--text-sm); }
+    .btn-lg { padding: var(--space-4) var(--space-8); font-size: var(--text-lg); }
+    /* Card preview */
+    .gift-card-preview {
+      max-width: 280px;
+    }
+    .gift-card-preview img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-3);
+    }
+    .gift-card-title {
+      font: 600 var(--text-base) var(--font-display);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-1);
+    }
+    .gift-card-subtitle {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      margin-bottom: var(--space-2);
+    }
+    .gift-card-price {
+      font: 600 var(--text-lg) var(--font-display);
+      color: var(--theme-primary);
+    }
+    /* Form elements */
+    .form-group { margin-bottom: var(--space-4); }
+    .form-label {
+      display: block;
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-2);
+    }
+    .form-input {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--text-base) var(--font-body);
+      color: var(--theme-text-primary);
+      background: var(--theme-bg-card);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-md);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--theme-primary);
+      box-shadow: var(--focus-ring);
+    }
+    .form-input::placeholder { color: var(--theme-text-muted); }
+    /* Chip / filter pill */
+    .chip-row { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-text-primary);
+      background: var(--theme-bg-elevated);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .chip:hover { border-color: var(--theme-primary); background: var(--theme-primary-light); }
+    .chip.active { background: var(--theme-primary); color: var(--theme-text-on-primary); border-color: var(--theme-primary); }
+    .chip-remove {
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      color: inherit;
+      opacity: 0.6;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+    }
+    .chip-remove:hover { opacity: 1; background: rgba(0,0,0,0.1); }
+    .chip.active .chip-remove:hover { background: rgba(255,255,255,0.2); }
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+    }
+    .breadcrumb a { color: var(--theme-primary); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb-separator { color: var(--theme-text-muted); }
+    /* Price range */
+    .price-range-preview { font: 700 var(--text-2xl) var(--font-display); color: var(--theme-primary); }
+    /* Bullet list */
+    .bullet-list-preview { max-width: 300px; }
+    .bullet-list-preview li { font-size: var(--text-sm); }
+    /* Disclosure */
+    .disclosure-preview { text-align: left; }
+    /* Typography samples */
+    .type-scale {
+      display: grid;
+      gap: var(--space-4);
+    }
+    .type-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      align-items: baseline;
+      gap: var(--space-4);
+    }
+    .type-label {
+      font: 500 var(--text-sm) var(--font-mono);
+      color: var(--theme-text-muted);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+    }
+    .type-sample { color: var(--theme-text-primary); }
+    /* Color palette */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: var(--space-4);
+    }
+    .color-swatch {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--theme-border);
+    }
+    .color-value {
+      height: 80px;
+    }
+    .color-info {
+      padding: var(--space-3);
+      font: var(--text-sm) var(--font-mono);
+      background: var(--theme-bg-elevated);
+      border-top: 1px solid var(--theme-border);
+    }
+    .color-name { display: block; color: var(--theme-text-primary); margin-bottom: var(--space-1); }
+    .color-hex { color: var(--theme-text-secondary); }
+    /* Spacing scale */
+    .space-scale {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: var(--space-4);
+    }
+    .space-item { text-align: center; }
+    .space-box {
+      height: 40px;
+      background: var(--theme-primary-light);
+      border: 1px dashed var(--theme-border);
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-2);
+    }
+    .space-label { font: var(--text-sm) var(--font-mono); color: var(--theme-text-secondary); }
+    /* Responsive notice */
+    .responsive-notice {
+      padding: var(--space-4);
+      background: var(--theme-primary-light);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-8);
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-primary);
+    }
+    .responsive-notice strong { color: var(--theme-primary); }
+    @media (max-width: 640px) {
+      .doc { padding: var(--space-8) var(--space-4); }
+      .doc-title { font-size: var(--text-4xl); }
+      .type-row { grid-template-columns: 1fr; gap: var(--space-1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="doc">
+    <header class="doc-header">
+      <h1 class="doc-title">GiftKaro Component Library</h1>
+      <p class="doc-subtitle">Design system reference for the editorial-first gift discovery platform. All components use CSS custom properties from <code>theme-tokens.css</code> and adapt to the active seasonal theme.</p>
+    </header>
+
+    <div class="section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Theme Selector</h2>
+          <p class="section-desc">Switch themes to preview components in each seasonal palette. Themes auto-apply based on calendar date in production.</p>
+        </div>
+        <div class="theme-toggle" role="radiogroup" aria-label="Select theme">
+          <button class="theme-btn active" data-theme="" role="radio" aria-checked="true">Default</button>
+          <button class="theme-btn" data-theme="diwali" role="radio" aria-checked="false">Diwali</button>
+          <button class="theme-btn" data-theme="christmas" role="radio" aria-checked="false">Christmas</button>
+          <button class="theme-btn" data-theme="valentines" role="radio" aria-checked="false">Valentine's</button>
+        </div>
+      </div>
+      <div class="responsive-notice">
+        <strong>Mobile-first:</strong> All components designed for touch (44×44px minimum targets). Resize viewport to see responsive behavior.
+      </div>
+    </div>
+
+    <!-- COLOR PALETTE -->
+    <section class="section" id="colors">
+      <header class="section-header"><h2 class="section-title">Color Palette</h2></header>
+      <div class="color-grid" id="color-palette"></div>
+    </section>
+
+    <!-- TYPOGRAPHY -->
+    <section class="section" id="typography">
+      <header class="section-header"><h2 class="section-title">Typography Scale</h2></header>
+      <div class="type-scale">
+        <div class="type-row"><span class="type-label">Display XL (5xl)</span><span class="type-sample" style="font: 700 var(--text-5xl)/var(--leading-tight) var(--font-display); letter-spacing: var(--tracking-tight);">GiftKaro</span></div>
+        <div class="type-row"><span class="type-label">Display LG (4xl)</span><span class="type-sample" style="font: 700 var(--text-4xl)/var(--leading-tight) var(--font-display); letter-spacing: var(--tracking-tight);">Find Thoughtful Gifts</span></div>
+        <div class="type-row"><span class="type-label">Heading (3xl)</span><span class="type-sample" style="font: 600 var(--text-3xl)/var(--leading-tight) var(--font-display);">Handcrafted Brass Diya Set</span></div>
+        <div class="type-row"><span class="type-label">Subheading (2xl)</span><span class="type-sample" style="font: 600 var(--text-2xl)/var(--leading-tight) var(--font-display);">Set of 4 traditional oil lamps</span></div>
+        <div class="type-row"><span class="type-label">Body Large (lg)</span><span class="type-sample" style="font: var(--text-lg)/var(--leading-relaxed) var(--font-body);">Elevate your festive decor with these artisan-crafted brass diyas, perfect for Diwali celebrations.</span></div>
+        <div class="type-row"><span class="type-label">Body (base)</span><span class="type-sample" style="font: var(--text-base)/var(--leading-relaxed) var(--font-body);">Elevate your festive decor with these artisan-crafted brass diyas, perfect for Diwali celebrations.</span></div>
+        <div class="type-row"><span class="type-label">Body Small (sm)</span><span class="type-sample" style="font: var(--text-sm)/var(--leading-relaxed) var(--font-body);">Elevate your festive decor with these artisan-crafted brass diyas.</span></div>
+        <div class="type-row"><span class="type-label">Caption (xs)</span><span class="type-sample" style="font: var(--text-xs)/var(--leading-normal) var(--font-body); color: var(--theme-text-muted);">As an Amazon Associate, I earn from qualifying purchases</span></div>
+        <div class="type-row"><span class="type-label">Label Uppercase</span><span class="type-sample" style="font: 500 var(--text-sm)/var(--leading-normal) var(--font-body); text-transform: uppercase; letter-spacing: var(--tracking-wider); color: var(--theme-text-secondary);">FESTIVAL · DIWALI</span></div>
+        <div class="type-row"><span class="type-label">Price Range</span><span class="type-sample" style="font: 700 var(--text-2xl) var(--font-display); color: var(--theme-primary);">₹899 – ₹1,499</span></div>
+      </div>
+    </section>
+
+    <!-- SPACING -->
+    <section class="section" id="spacing">
+      <header class="section-header"><h2 class="section-title">Spacing Scale</h2></header>
+      <div class="space-scale">
+        <div class="space-item"><div class="space-box" style="height: 4px;"></div><span class="space-label">space-1 (4px)</span></div>
+        <div class="space-item"><div class="space-box" style="height: 8px;"></div><span class="space-label">space-2 (8px)</span></div>
+        <div class="space-item"><div class="space-box" style="height: 12px;"></div><span class="space-label">space-3 (12px)</span></div>
+        <div class="space-item"><div class="space-box" style="height: 16px;"></div><span class="space-label">space-4 (16px)</span></div>
+        <div class="space-item"><div class="space-box" style="height: 20px;"></div><span class="space-label">space-5 (20px)</span></div>
+        <div class="space-item"><div class="space-box" style="height: 24px;"></div><span class="space-label">space-6 (24px)</span></div>
+        <div class="space-item"><div class="space-box" style="height: 32px;"></div><span class="space-label">space-8 (32px)</span></div>
+        <div class="space-item"><div class="space-box" style="height: 40px;"></div><span class="space-label">space-10 (40px)</span></div>
+        <div class="space-item"><div class="space-box" style="height: 48px;"></div><span class="space-label">space-12 (48px)</span></div>
+        <div class="space-item"><div class="space-box" style="height: 64px;"></div><span class="space-label">space-16 (64px)</span></div>
+        <div class="space-item"><div class="space-box" style="height: 80px;"></div><span class="space-label">space-20 (80px)</span></div>
+      </div>
+    </section>
+
+    <!-- BUTTONS -->
+    <section class="section" id="buttons">
+      <header class="section-header">
+        <h2 class="section-title">Buttons</h2>
+        <p class="section-desc">Primary CTAs use theme accent. Ghost buttons for secondary actions. All meet 44px touch target.</p>
+      </header>
+      <div class="component-grid">
+        <article class="component-card">
+          <h3 class="component-name">Primary CTA</h3>
+          <p class="component-desc">Main action button — "View on Amazon", "Explore Gifts", "Subscribe". Uses theme accent background.</p>
+          <div class="component-preview">
+            <p class="preview-label">Default / Hover / Focus</p>
+            <div class="btn-row">
+              <button class="btn-primary" data-od-id="btn-primary-default">View on Amazon →</button>
+              <button class="btn-primary" style="background: var(--theme-primary-hover);" data-od-id="btn-primary-hover">View on Amazon →</button>
+              <button class="btn-primary" style="box-shadow: var(--focus-ring);" data-od-id="btn-primary-focus">View on Amazon →</button>
+            </div>
+            <div class="btn-row" style="margin-top: var(--space-3);">
+              <button class="btn-primary btn-sm" data-od-id="btn-primary-sm">Small</button>
+              <button class="btn-primary btn-lg" data-od-id="btn-primary-lg">Large</button>
+            </div>
+          </div>
+        </article>
+        <article class="component-card">
+          <h3 class="component-name">Ghost Button</h3>
+          <p class="component-desc">Secondary actions — "Explore Gifts" on hero, "Back to Results". Transparent with border.</p>
+          <div class="component-preview">
+            <p class="preview-label">Default / Hover / Focus</p>
+            <div class="btn-row">
+              <button class="btn-ghost" data-od-id="btn-ghost-default">Explore Gifts</button>
+              <button class="btn-ghost" style="background: var(--theme-ghost-hover); border-color: var(--theme-border-strong);" data-od-id="btn-ghost-hover">Explore Gifts</button>
+              <button class="btn-ghost" style="box-shadow: var(--focus-ring);" data-od-id="btn-ghost-focus">Explore Gifts</button>
+            </div>
+          </div>
+        </article>
+        <article class="component-card">
+          <h3 class="component-name">Ghost Light (Dark BG)</h3>
+          <p class="component-desc">For dark backgrounds — hero overlays, cinematic sections. White text, white border.</p>
+          <div class="component-preview" style="background: var(--theme-secondary);">
+            <p class="preview-label" style="color: rgba(255,255,255,0.6);">Default / Hover / Focus</p>
+            <div class="btn-row">
+              <button class="btn-ghost-light" data-od-id="btn-ghost-light-default">View on Amazon →</button>
+              <button class="btn-ghost-light" style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.8);" data-od-id="btn-ghost-light-hover">View on Amazon →</button>
+              <button class="btn-ghost-light" style="box-shadow: 0 0 0 3px rgba(255,255,255,0.3);" data-od-id="btn-ghost-light-focus">View on Amazon →</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- GIFT CARD -->
+    <section class="section" id="gift-card">
+      <header class="section-header">
+        <h2 class="section-title">Gift Card</h2>
+        <p class="section-desc">Core content unit — used in "New This Week", search results, related gifts. Editorial layout: image + title + subtitle + price.</p>
+      </header>
+      <div class="component-grid">
+        <article class="component-card">
+          <h3 class="component-name">Default Gift Card</h3>
+          <div class="component-preview">
+            <p class="preview-label">Desktop layout (280px max-width)</p>
+            <div class="gift-card-preview" data-od-id="gift-card-default">
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 225'><rect fill='%23F59E0B' width='400' height='225'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='system-ui' font-size='18' font-weight='600'>Gift Image</text></svg>" alt="Handcrafted Brass Diya Set" loading="lazy">
+              <h4 class="gift-card-title">Handcrafted Brass Diya Set</h4>
+              <p class="gift-card-subtitle">Set of 4 traditional oil lamps</p>
+              <div class="gift-card-price">₹899 – ₹1,499</div>
+            </div>
+          </div>
+        </article>
+        <article class="component-card">
+          <h3 class="component-name">Gift Card with Preview</h3>
+          <p class="component-desc">Enhanced version showing "Why It's Great" preview line (1 line, truncated).</p>
+          <div class="component-preview">
+            <p class="preview-label">With preview bullet</p>
+            <div class="gift-card-preview" data-od-id="gift-card-preview">
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 225'><rect fill='%23DC2626' width='400' height='225'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='system-ui' font-size='18' font-weight='600'>Gift Image</text></svg>" alt="Christmas Gift Box" loading="lazy">
+              <h4 class="gift-card-title">Luxury Christmas Gift Box</h4>
+              <p class="gift-card-subtitle">Curated artisanal treats & decor</p>
+              <p style="font: var(--text-sm)/var(--leading-normal) var(--font-body); color: var(--theme-text-secondary); margin-bottom: var(--space-2); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;">• Handpicked premium chocolates, ornaments, and scented candles</p>
+              <div class="gift-card-price">₹2,499 – ₹4,999</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FORMS -->
+    <section class="section" id="forms">
+      <header class="section-header">
+        <h2 class="section-title">Form Elements</h2>
+        <p class="section-desc">Search input, newsletter signup, filter controls. All inputs have visible focus states.</p>
+      </header>
+      <div class="component-grid">
+        <article class="component-card">
+          <h3 class="component-name">Search Input</h3>
+          <p class="component-desc">Prominent search bar with magnifier icon. Auto-focused on search page.</p>
+          <div class="component-preview">
+            <p class="preview-label">Default / Focus</p>
+            <div class="form-group">
+              <label class="form-label visually-hidden" for="search-demo">Search gifts</label>
+              <input type="search" id="search-demo" class="form-input" placeholder="Search gifts..." aria-label="Search gifts" data-od-id="search-input">
+            </div>
+            <div class="form-group" style="margin-top: var(--space-3);">
+              <input type="search" class="form-input" placeholder="Search gifts..." aria-label="Search gifts" style="border-color: var(--theme-primary); box-shadow: var(--focus-ring);">
+            </div>
+          </div>
+        </article>
+        <article class="component-card">
+          <h3 class="component-name">Newsletter Signup</h3>
+          <p class="component-desc">Footer email capture with primary CTA. Transparent input on dark surface.</p>
+          <div class="component-preview" style="background: var(--theme-secondary); padding: var(--space-6);">
+            <p class="preview-label" style="color: rgba(255,255,255,0.6);">Dark surface variant</p>
+            <form style="display: flex; gap: var(--space-3); max-width: 400px; flex-wrap: wrap;">
+              <div style="flex: 1; min-width: 200px;">
+                <label class="form-label" style="color: var(--theme-text-on-primary); text-transform: uppercase; letter-spacing: var(--tracking-wider); font-size: var(--text-xs);" for="newsletter-demo">Subscribe</label>
+                <input type="email" id="newsletter-demo" class="form-input" placeholder="Enter your email" style="background: transparent; border-color: rgba(255,255,255,0.3); color: var(--theme-text-on-primary);" aria-label="Email address">
+              </div>
+              <div style="align-self: flex-end;">
+                <button type="submit" class="btn-primary" data-od-id="newsletter-cta">Subscribe →</button>
+              </div>
+            </form>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FILTER CHIPS -->
+    <section class="section" id="chips">
+      <header class="section-header">
+        <h2 class="section-title">Filter Chips / Pills</h2>
+        <p class="section-desc">Multi-select tags for Occasion, Vibe, Relationship, Price. Removable, keyboard accessible, show active count.</p>
+      </header>
+      <div class="component-grid">
+        <article class="component-card">
+          <h3 class="component-name">Category Chips</h3>
+          <div class="component-preview">
+            <p class="preview-label">Default / Hover / Active</p>
+            <div class="chip-row">
+              <span class="chip" data-od-id="chip-diwali">Diwali</span>
+              <span class="chip" style="border-color: var(--theme-primary); background: var(--theme-primary-light);" data-od-id="chip-hover">Christmas</span>
+              <span class="chip active" data-od-id="chip-active">Valentine's</span>
+            </div>
+          </div>
+        </article>
+        <article class="component-card">
+          <h3 class="component-name">Removable Filter Pills</h3>
+          <p class="component-desc">Applied filters with count and remove button. Used in search results header.</p>
+          <div class="component-preview">
+            <p class="preview-label">Active filters with counts</p>
+            <div class="chip-row">
+              <span class="chip active" data-od-id="pill-occasion">Occasion: Diwali <button class="chip-remove" aria-label="Remove Diwali filter">×</button></span>
+              <span class="chip active" data-od-id="pill-vibe">Vibe: Traditional <button class="chip-remove" aria-label="Remove Traditional filter">×</button></span>
+              <span class="chip active" data-od-id="pill-price">Price: ₹500–₹2,000 <button class="chip-remove" aria-label="Remove price filter">×</button></span>
+            </div>
+            <p style="margin-top: var(--space-3); font: var(--text-sm) var(--font-body); color: var(--theme-text-secondary);">
+              <button class="btn-ghost btn-sm" style="padding: var(--space-1) var(--space-3);">Clear all</button>
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- BREADCRUMB -->
+    <section class="section" id="breadcrumb">
+      <header class="section-header">
+        <h2 class="section-title">Breadcrumb</h2>
+        <p class="section-desc">Navigation aid on gift detail pages — "Back to Occasion/Category".</p>
+      </header>
+      <div class="component-preview" style="max-width: 500px;">
+        <p class="preview-label">Gift detail page breadcrumb</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb" data-od-id="breadcrumb">
+          <a href="/">Home</a>
+          <span class="breadcrumb-separator" aria-hidden="true">/</span>
+          <a href="/occasion/diwali">Diwali Gifts</a>
+          <span class="breadcrumb-separator" aria-hidden="true">/</span>
+          <span aria-current="page">Handcrafted Brass Diya Set</span>
+        </nav>
+        <p class="preview-label" style="margin-top: var(--space-4);">Alternative: Back link only</p>
+        <nav class="breadcrumb" data-od-id="back-link">
+          <a href="/occasion/diwali" style="display: inline-flex; align-items: center; gap: var(--space-1);">← Back to Diwali Gifts</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- PRICE RANGE -->
+    <section class="section" id="price-range">
+      <header class="section-header">
+        <h2 class="section-title">Price Range Display</h2>
+        <p class="section-desc">Shown on gift cards and detail pages. Uses theme primary color, display font. No exact prices (avoids stale data).</p>
+      </header>
+      <div class="component-preview">
+        <p class="preview-label">Variations</p>
+        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+          <div class="price-range-preview" data-od-id="price-card">₹899 – ₹1,499</div>
+          <div class="price-range-preview" style="font-size: var(--text-3xl);" data-od-id="price-detail">₹2,499 – ₹4,999</div>
+          <div class="price-range-preview" style="font-size: var(--text-xl);" data-od-id="price-mobile">₹1,000 – ₹2,500</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY IT'S GREAT / BULLET LIST -->
+    <section class="section" id="bullets">
+      <header class="section-header">
+        <h2 class="section-title">Why It's Great — Bullet List</h2>
+        <p class="section-desc">Styled list with theme-accent bullets. Key feature highlights on gift detail page.</p>
+      </header>
+      <div class="component-preview">
+        <p class="preview-label">Gift detail page — 3–5 bullets</p>
+        <ul class="bullet-list bullet-list-preview" data-od-id="why-great">
+          <li>Handmade by artisans in Moradabad using traditional techniques</li>
+          <li>Solid brass construction — no hollow bases that tip over</li>
+          <li>Perfect size for rangoli centerpieces or doorway placement</li>
+          <li>Comes in a reusable gift box with velvet lining</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- AFFILIATE DISCLOSURE -->
+    <section class="section" id="disclosure">
+      <header class="section-header">
+        <h2 class="section-title">Affiliate Disclosure</h2>
+        <p class="section-desc">Legal requirement — appears in footer on every page + below Amazon CTA on gift detail.</p>
+      </header>
+      <div class="component-preview">
+        <p class="preview-label">Footer placement (centered)</p>
+        <p class="disclosure disclosure-preview" data-od-id="disclosure-footer">As an Amazon Associate, I earn from qualifying purchases</p>
+        <p class="preview-label" style="margin-top: var(--space-4);">Below CTA on gift detail (left-aligned)</p>
+        <p class="disclosure" style="text-align: left; margin-top: var(--space-2);" data-od-id="disclosure-cta">As an Amazon Associate, I earn from qualifying purchases</p>
+      </div>
+    </section>
+
+    <!-- CATEGORY GRID -->
+    <section class="section" id="category-grid">
+      <header class="section-header">
+        <h2 class="section-title">Category Grid Card</h2>
+        <p class="section-desc">Icon/pattern cards for Festivals, Occasions, Vibes on homepage. Click navigates to filtered listing.</p>
+      </header>
+      <div class="component-preview">
+        <p class="preview-label">Festival / Occasion / Vibe cards</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--space-4);">
+          <article style="text-align: center; padding: var(--space-6); background: var(--theme-bg-card); border: 1px solid var(--theme-border); border-radius: var(--radius-lg); transition: all var(--transition-base);" data-od-id="cat-diwali">
+            <div style="width: 56px; height: 56px; margin: 0 auto var(--space-3); background: var(--theme-primary-light); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--theme-primary); font-size: 24px;">🪔</div>
+            <h4 style="font: 600 var(--text-base) var(--font-display); color: var(--theme-text-primary);">Diwali</h4>
+            <p style="font: var(--text-xs) var(--font-body); color: var(--theme-text-muted); margin-top: var(--space-1); text-transform: uppercase; letter-spacing: var(--tracking-wide);">Festival</p>
+          </article>
+          <article style="text-align: center; padding: var(--space-6); background: var(--theme-bg-card); border: 1px solid var(--theme-border); border-radius: var(--radius-lg); transition: all var(--transition-base);" data-od-id="cat-anniversary">
+            <div style="width: 56px; height: 56px; margin: 0 auto var(--space-3); background: var(--theme-primary-light); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--theme-primary); font-size: 24px;">💍</div>
+            <h4 style="font: 600 var(--text-base) var(--font-display); color: var(--theme-text-primary);">Anniversary</h4>
+            <p style="font: var(--text-xs) var(--font-body); color: var(--theme-text-muted); margin-top: var(--space-1); text-transform: uppercase; letter-spacing: var(--tracking-wide);">Occasion</p>
+          </article>
+          <article style="text-align: center; padding: var(--space-6); background: var(--theme-bg-card); border: 1px solid var(--theme-border); border-radius: var(--radius-lg); transition: all var(--transition-base);" data-od-id="cat-minimal">
+            <div style="width: 56px; height: 56px; margin: 0 auto var(--space-3); background: var(--theme-primary-light); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--theme-primary); font-size: 24px;">✨</div>
+            <h4 style="font: 600 var(--text-base) var(--font-display); color: var(--theme-text-primary);">Minimal</h4>
+            <p style="font: var(--text-xs) var(--font-body); color: var(--theme-text-muted); margin-top: var(--space-1); text-transform: uppercase; letter-spacing: var(--tracking-wide);">Vibe</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- AMAZON CTA -->
+    <section class="section" id="amazon-cta">
+      <header class="section-header">
+        <h2 class="section-title">Amazon CTA Button</h2>
+        <p class="section-desc">Primary conversion button — "View on Amazon →". Full-width on mobile, auto-width desktop. Opens in new tab with affiliate tag.</p>
+      </header>
+      <div class="component-grid">
+        <article class="component-card">
+          <h3 class="component-name">Desktop (Auto-width)</h3>
+          <div class="component-preview">
+            <p class="preview-label">Min-width 320px, centered in content panel</p>
+            <button class="btn-primary" style="min-width: 320px;" data-od-id="amazon-cta-desktop">View on Amazon →</button>
+          </div>
+        </article>
+        <article class="component-card">
+          <h3 class="component-name">Mobile (Full-width)</h3>
+          <div class="component-preview">
+            <p class="preview-label">100% width, optionally sticky bottom</p>
+            <button class="btn-primary" style="width: 100%;" data-od-id="amazon-cta-mobile">View on Amazon →</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Theme toggle functionality
+    const themeButtons = document.querySelectorAll('.theme-btn');
+    const html = document.documentElement;
+
+    themeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.dataset.theme;
+        html.dataset.theme = theme || '';
+        localStorage.setItem('giftkaro-theme', theme || 'default');
+
+        themeButtons.forEach(b => {
+          b.classList.toggle('active', b === btn);
+          b.setAttribute('aria-checked', b === btn);
+        });
+      });
+    });
+
+    // Restore saved theme
+    const saved = localStorage.getItem('giftkaro-theme');
+    if (saved && saved !== 'default') {
+      html.dataset.theme = saved;
+      themeButtons.forEach(b => {
+        const isActive = b.dataset.theme === saved;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-checked', isActive);
+      });
+    }
+
+    // Auto-apply theme based on date (demo)
+    function getSeasonalTheme() {
+      const today = new Date();
+      const mmdd = `${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+      if (mmdd >= '10-15' && mmdd <= '11-05') return 'diwali';
+      if (mmdd >= '12-01' && mmdd <= '12-26') return 'christmas';
+      if (mmdd >= '02-01' && mmdd <= '02-15') return 'valentines';
+      return '';
+    }
+
+    // Apply auto theme if no user preference
+    if (!localStorage.getItem('giftkaro-theme')) {
+      const autoTheme = getSeasonalTheme();
+      if (autoTheme) {
+        html.dataset.theme = autoTheme;
+        themeButtons.forEach(b => {
+          const isActive = b.dataset.theme === autoTheme;
+          b.classList.toggle('active', isActive);
+          b.setAttribute('aria-checked', isActive);
+        });
+      }
+    }
+
+    // Populate color palette dynamically from CSS variables
+    function populateColorPalette() {
+      const container = document.getElementById('color-palette');
+      const themes = ['default', 'diwali', 'christmas', 'valentines'];
+      const colorKeys = [
+        { key: '--theme-primary', name: 'Primary' },
+        { key: '--theme-primary-hover', name: 'Primary Hover' },
+        { key: '--theme-primary-light', name: 'Primary Light' },
+        { key: '--theme-secondary', name: 'Secondary' },
+        { key: '--theme-bg-start', name: 'BG Start' },
+        { key: '--theme-bg-end', name: 'BG End' },
+        { key: '--theme-bg-card', name: 'Card BG' },
+        { key: '--theme-text-primary', name: 'Text Primary' },
+        { key: '--theme-text-secondary', name: 'Text Secondary' },
+        { key: '--theme-text-muted', name: 'Text Muted' },
+        { key: '--theme-border', name: 'Border' },
+        { key: '--theme-border-strong', name: 'Border Strong' },
+        { key: '--theme-cta-bg', name: 'CTA BG' },
+        { key: '--theme-cta-hover', name: 'CTA Hover' },
+        { key: '--theme-bullet', name: 'Bullet' },
+        { key: '--theme-focus-ring', name: 'Focus Ring' },
+      ];
+
+      themes.forEach(theme => {
+        const section = document.createElement('div');
+        section.style.marginBottom = 'var(--space-8)';
+        const title = document.createElement('h3');
+        title.style.font = '600 var(--text-lg) var(--font-display)';
+        title.style.color = 'var(--theme-text-primary)';
+        title.style.marginBottom = 'var(--space-4)';
+        title.textContent = theme.charAt(0).toUpperCase() + theme.slice(1) + (theme === 'default' ? ' (Default)' : '');
+        section.appendChild(title);
+
+        const grid = document.createElement('div');
+        grid.className = 'color-grid';
+
+        // Temporarily apply theme to read computed values
+        const prevTheme = html.dataset.theme;
+        html.dataset.theme = theme === 'default' ? '' : theme;
+
+        colorKeys.forEach(({ key, name }) => {
+          const value = getComputedStyle(html).getPropertyValue(key).trim();
+          if (value) {
+            const swatch = document.createElement('div');
+            swatch.className = 'color-swatch';
+            swatch.innerHTML = `
+              <div class="color-value" style="background: ${value};"></div>
+              <div class="color-info">
+                <span class="color-name">${name}</span>
+                <span class="color-hex">${value}</span>
+              </div>
+            `;
+            grid.appendChild(swatch);
+          }
+        });
+
+        html.dataset.theme = prevTheme || '';
+        section.appendChild(grid);
+        container.appendChild(section);
+      });
+    }
+
+    populateColorPalette();
+  </script>
+</body>
+</html>

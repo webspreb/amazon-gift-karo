@@ -1,9 +1,13 @@
+'use client';
+
 import Link from 'next/link';
 
-interface CategoryItem {
-  href: string;
-  label: string;
+export interface CategoryItem {
+  id: string;
+  name: string;
   icon: string;
+  count: number;
+  type: string; // 'festival', 'occasion', 'vibe', etc.
 }
 
 interface CategoryGridProps {
@@ -13,20 +17,40 @@ interface CategoryGridProps {
 
 export function CategoryGrid({ title, categories }: CategoryGridProps) {
   return (
-    <section className="py-8">
-      <h2 className="mb-6 text-2xl font-bold text-gray-900">{title}</h2>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+    <div style={{ marginBottom: 'var(--space-16)' }}>
+      <h3 style={{
+        font: '600 var(--text-2xl) var(--font-display)',
+        color: 'var(--theme-text-primary)',
+        marginBottom: 'var(--space-6)',
+        textAlign: 'center'
+      }}>
+        {title}
+      </h3>
+      <div className="category-grid" role="list">
         {categories.map(cat => (
           <Link
-            key={cat.href}
-            href={cat.href}
-            className="group flex flex-col items-center rounded-xl border border-gray-200 bg-white p-6 text-center shadow-sm transition-all hover:shadow-md hover:border-amber-200"
+            key={cat.id}
+            href={
+              cat.type === 'festival' ? `/festivals/${cat.id}` :
+              cat.type === 'occasion' ? `/occasions/${cat.id}` :
+              cat.type === 'vibe' ? `/vibes/${cat.id}` :
+              `/search?${cat.type}=${cat.id}`
+            }
+            className="category-card"
+            role="listitem"
+            data-od-id={`cat-${cat.type}-${cat.id}`}
+            aria-label={`${cat.name} (${cat.count} gifts)`}
           >
-            <span className="text-3xl mb-2">{cat.icon}</span>
-            <span className="text-sm font-medium text-gray-700 group-hover:text-amber-600">{cat.label}</span>
+            <span className="category-icon" aria-hidden="true">{cat.icon}</span>
+            <h4 className="category-name" data-od-id={`cat-name-${cat.type}-${cat.id}`}>
+              {cat.name}
+            </h4>
+            <span className="category-type" data-od-id={`cat-count-${cat.type}-${cat.id}`}>
+              {cat.count} {cat.count === 1 ? 'gift' : 'gifts'}
+            </span>
           </Link>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

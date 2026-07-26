@@ -1,5 +1,4 @@
 import { MetadataRoute } from 'next';
-import '@/content/gifts';
 import { getAllGifts, getFestivals, getOccasions, getRelationships, getVibes } from '@/lib/gifts';
 
 export default function sitemap(): MetadataRoute.Sitemap {

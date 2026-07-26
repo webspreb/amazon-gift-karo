@@ -1,29 +1,51 @@
-interface SeasonalHeroProps {
-  title: string;
-  subtitle: string;
-  ctaText?: string;
-  ctaHref?: string;
-  bgClass?: string;
-}
+'use client';
 
-export function SeasonalHero({ title, subtitle, ctaText, ctaHref, bgClass }: SeasonalHeroProps) {
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+
+export function SeasonalHero() {
+  const [theme, setTheme] = useState(() => {
+    if (typeof document !== 'undefined') {
+      return document.documentElement.dataset.theme || 'default';
+    }
+    return 'default';
+  });
+
+  useEffect(() => {
+    const handleThemeChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      setTheme(customEvent.detail || 'default');
+    };
+
+    window.addEventListener('themechange', handleThemeChange);
+    return () => window.removeEventListener('themechange', handleThemeChange);
+  }, []);
+
+  const badgeText: Record<string, string> = {
+    diwali: 'Diwali Collection Live',
+    christmas: 'Christmas Collection Live',
+    valentines: "Valentine's Collection Live",
+    default: 'New Seasonal Picks',
+  };
+
   return (
-    <section className={`relative overflow-hidden rounded-2xl ${bgClass ?? 'bg-gradient-to-r from-amber-50 to-orange-100'} px-6 py-16 sm:px-12 sm:py-24`}>
-      <div className="relative z-10">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
-          {title}
+    <section className="hero" aria-labelledby="hero-title" data-od-id="hero">
+      <div className="container hero-content">
+        <span className="hero-badge" data-od-id="hero-badge">
+          <span aria-hidden="true">✨</span>
+          <span id="heroSeasonText">{badgeText[theme] || badgeText.default}</span>
+        </span>
+        <h1 id="hero-title" className="hero-title" data-od-id="hero-title">
+          Find Thoughtful Gifts They&apos;ll Actually Love
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-gray-600">
-          {subtitle}
+        <p className="hero-subtitle" data-od-id="hero-subtitle">
+          Curated gift guides for every occasion, festival, and vibe. No endless scrolling — just handpicked picks that feel personal.
         </p>
-        {ctaText && ctaHref && (
-          <a
-            href={ctaHref}
-            className="mt-6 inline-flex items-center rounded-lg bg-amber-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-amber-600"
-          >
-            {ctaText}
-          </a>
-        )}
+        <div className="hero-cta">
+          <Link href="/search" className="btn-primary" data-od-id="hero-cta">
+            Explore Gifts →
+          </Link>
+        </div>
       </div>
     </section>
   );

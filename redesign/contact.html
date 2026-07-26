@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Get in touch with GiftKaro. Questions, feedback, partnership inquiries — we'd love to hear from you.">
+  <meta name="theme-color" content="#F59E0B">
+  <title>Contact Us — GiftKaro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme-tokens.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font: var(--text-base)/var(--leading-normal) var(--font-body);
+      color: var(--theme-text-primary);
+      background: var(--theme-bg-start);
+      min-height: 100vh;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--container-gutter);
+    }
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* HEADER */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--theme-bg-card);
+      border-bottom: 1px solid var(--theme-border);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--header-height);
+      gap: var(--space-4);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font: 700 var(--text-xl) var(--font-display);
+      color: var(--theme-text-primary);
+      letter-spacing: var(--tracking-tight);
+    }
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--theme-primary);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--theme-text-on-primary);
+      font-size: 20px;
+    }
+    .nav {
+      display: none;
+      gap: var(--space-8);
+    }
+    .nav-link {
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      padding: var(--space-2) 0;
+      border-bottom: 2px solid transparent;
+      transition: all var(--transition-fast);
+    }
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color: var(--theme-primary);
+      border-color: var(--theme-primary);
+      outline: none;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      background: var(--theme-bg-elevated);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .theme-toggle-btn:hover {
+      border-color: var(--theme-primary);
+      color: var(--theme-primary);
+    }
+    .mobile-menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: none;
+      color: var(--theme-text-primary);
+      cursor: pointer;
+      border-radius: var(--radius-md);
+    }
+    .mobile-menu-btn:hover { background: var(--theme-bg-elevated); }
+    .mobile-menu-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    @media (min-width: 768px) {
+      .nav { display: flex; }
+      .mobile-menu-btn { display: none; }
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      padding: var(--space-24) 0 var(--space-16);
+      background: var(--hero-gradient);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--hero-illustration);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-primary);
+      background: var(--theme-primary-light);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-full);
+      margin-bottom: var(--space-6);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font: 700 var(--text-5xl)/var(--leading-tight) var(--font-display);
+      letter-spacing: var(--tracking-tight);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-6);
+    }
+    .hero-subtitle {
+      font: var(--text-lg)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+      max-width: 56ch;
+      margin: 0 auto;
+    }
+
+    /* CONTACT FORM */
+    .contact-section {
+      padding: var(--space-16) 0;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+    }
+    @media (min-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .contact-form-card {
+      background: var(--theme-bg-card);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+    }
+    .form-title {
+      font: 600 var(--text-xl) var(--font-body);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-2);
+    }
+    .form-subtitle {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      margin-bottom: var(--space-8);
+    }
+    .form-group {
+      margin-bottom: var(--space-5);
+    }
+    .form-label {
+      display: block;
+      font: 500 var(--text-sm) var(--font-body);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-2);
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-primary);
+      background: var(--theme-bg-elevated);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--theme-primary);
+      box-shadow: 0 0 0 3px var(--theme-primary-light);
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--theme-text-tertiary);
+    }
+    .form-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 40px;
+    }
+    .form-submit {
+      width: 100%;
+      padding: var(--space-4) var(--space-6);
+      font: 600 var(--text-base) var(--font-body);
+      color: var(--theme-text-on-primary);
+      background: var(--theme-primary);
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .form-submit:hover {
+      background: var(--theme-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .form-submit:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+    .form-success {
+      display: none;
+      padding: var(--space-6);
+      background: var(--theme-success-light);
+      border: 1px solid var(--theme-success);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+    .form-success.visible {
+      display: block;
+    }
+    .form-success-title {
+      font: 600 var(--text-lg) var(--font-body);
+      color: var(--theme-success);
+      margin-bottom: var(--space-2);
+    }
+    .form-success-text {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+    }
+
+    /* INFO CARDS */
+    .info-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+    .info-card {
+      background: var(--theme-bg-card);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      transition: all var(--transition-base);
+    }
+    .info-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--theme-border-hover);
+    }
+    .info-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--theme-primary-light);
+      color: var(--theme-primary);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-4);
+      font-size: 24px;
+    }
+    .info-title {
+      font: 600 var(--text-base) var(--font-body);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-2);
+    }
+    .info-text {
+      font: var(--text-sm)/var(--leading-relaxed) var(--font-body);
+      color: var(--theme-text-secondary);
+    }
+    .info-link {
+      color: var(--theme-primary);
+      font-weight: 500;
+      transition: color var(--transition-fast);
+    }
+    .info-link:hover {
+      color: var(--theme-primary-hover);
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: var(--space-16) 0 var(--space-8);
+      background: var(--theme-bg-card);
+      border-top: 1px solid var(--theme-border);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      margin-bottom: var(--space-12);
+    }
+    @media (min-width: 640px) {
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    }
+    .footer-brand { max-width: 320px; }
+    .footer-logo {
+      font: 700 var(--text-xl) var(--font-display);
+      color: var(--theme-text-primary);
+      margin-bottom: var(--space-3);
+    }
+    .footer-desc {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      line-height: var(--leading-relaxed);
+    }
+    .footer-heading {
+      font: 600 var(--text-sm) var(--font-body);
+      color: var(--theme-text-primary);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      margin-bottom: var(--space-4);
+    }
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .footer-link {
+      font: var(--text-sm) var(--font-body);
+      color: var(--theme-text-secondary);
+      transition: color var(--transition-fast);
+    }
+    .footer-link:hover { color: var(--theme-primary); }
+    .footer-bottom {
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--theme-border);
+      text-align: center;
+    }
+    .footer-disclosure {
+      font: var(--text-xs) var(--font-body);
+      color: var(--theme-text-tertiary);
+      margin-bottom: var(--space-2);
+    }
+    .footer-copyright {
+      font: var(--text-xs) var(--font-body);
+      color: var(--theme-text-tertiary);
+    }
+
+    /* MOBILE MENU */
+    .mobile-menu-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+    .mobile-menu-backdrop.open { opacity: 1; }
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 300px;
+      max-width: 85vw;
+      background: var(--theme-bg-card);
+      z-index: 201;
+      transform: translateX(100%);
+      transition: transform var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-6);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-8);
+    }
+    .mobile-menu-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: none;
+      color: var(--theme-text-primary);
+      cursor: pointer;
+      border-radius: var(--radius-md);
+    }
+    .mobile-menu-close:hover { background: var(--theme-bg-elevated); }
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .mobile-nav-link {
+      font: 500 var(--text-base) var(--font-body);
+      color: var(--theme-text-secondary);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+    }
+    .mobile-nav-link:hover {
+      background: var(--theme-bg-elevated);
+      color: var(--theme-primary);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" data-od-id="header">
+    <div class="container header-inner">
+      <a href="homepage.html" class="logo" aria-label="GiftKaro Home" data-od-id="logo">
+        <span class="logo-mark" aria-hidden="true">🎁</span>
+        GiftKaro
+      </a>
+      <nav class="nav" aria-label="Main navigation" data-od-id="main-nav">
+        <a href="search.html" class="nav-link">Search</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="contact.html" class="nav-link" aria-current="page">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Change theme" data-od-id="theme-toggle">Theme</button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" data-od-id="mobile-menu-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-backdrop" id="mobileMenuBackdrop" data-od-id="mobile-menu-backdrop"></div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" data-od-id="mobile-menu">
+    <div class="mobile-menu-header">
+      <span class="logo" style="font-size: var(--text-lg);">
+        <span class="logo-mark" aria-hidden="true" style="width:28px;height:28px;font-size:16px;">🎁</span>
+        GiftKaro
+      </span>
+      <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu" data-od-id="mobile-menu-close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="mobile-nav">
+      <a href="search.html" class="mobile-nav-link">Search</a>
+      <a href="about.html" class="mobile-nav-link">About</a>
+      <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
+      <a href="contact.html" class="mobile-nav-link" aria-current="page">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" data-od-id="hero">
+    <div class="container hero-content">
+      <span class="hero-badge" data-od-id="hero-badge">Get in Touch</span>
+      <h1 class="hero-title" data-od-id="hero-title">Contact Us</h1>
+      <p class="hero-subtitle" data-od-id="hero-subtitle">Questions, feedback, partnership inquiries — we'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <main>
+    <section class="contact-section" data-od-id="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Form -->
+          <div class="contact-form-card" data-od-id="form-card">
+            <h2 class="form-title" data-od-id="form-title">Send Us a Message</h2>
+            <p class="form-subtitle" data-od-id="form-subtitle">We typically respond within 2–3 business days.</p>
+            <form id="contactForm" data-od-id="contact-form">
+              <div class="form-group">
+                <label for="contactName" class="form-label">Name</label>
+                <input type="text" id="contactName" class="form-input" placeholder="Your name" required data-od-id="contact-name">
+              </div>
+              <div class="form-group">
+                <label for="contactEmail" class="form-label">Email</label>
+                <input type="email" id="contactEmail" class="form-input" placeholder="you@example.com" required data-od-id="contact-email">
+              </div>
+              <div class="form-group">
+                <label for="contactSubject" class="form-label">Subject</label>
+                <select id="contactSubject" class="form-select" required data-od-id="contact-subject">
+                  <option value="">Select a topic</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="partnership">Partnership</option>
+                  <option value="bug">Bug Report</option>
+                  <option value="gift-suggestion">Gift Suggestion</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contactMessage" class="form-label">Message</label>
+                <textarea id="contactMessage" class="form-textarea" placeholder="Tell us what's on your mind..." required data-od-id="contact-message"></textarea>
+              </div>
+              <button type="submit" class="form-submit" data-od-id="contact-submit">Send Message →</button>
+            </form>
+            <div class="form-success" id="formSuccess" data-od-id="form-success">
+              <div class="form-success-title">Message Sent!</div>
+              <p class="form-success-text">Thanks for reaching out. We'll get back to you within 2–3 business days.</p>
+            </div>
+          </div>
+
+          <!-- Info Cards -->
+          <div class="info-cards" data-od-id="info-cards">
+            <div class="info-card" data-od-id="info-response">
+              <div class="info-icon">⏰</div>
+              <h3 class="info-title">Response Time</h3>
+              <p class="info-text">We typically respond within 2–3 business days. For urgent matters, please include "Urgent" in your subject line.</p>
+            </div>
+            <div class="info-card" data-od-id="info-partnerships">
+              <div class="info-icon">🤝</div>
+              <h3 class="info-title">Partnerships</h3>
+              <p class="info-text">Interested in working together? We're open to collaborations with brands, makers, and fellow curators. Select "Partnership" as your subject.</p>
+            </div>
+            <div class="info-card" data-od-id="info-suggestions">
+              <div class="info-icon">💡</div>
+              <h3 class="info-title">Gift Suggestions</h3>
+              <p class="info-text">Know a great product that should be on GiftKaro? We're always looking for thoughtful, quality finds. Select "Gift Suggestion" as your subject.</p>
+            </div>
+            <div class="info-card" data-od-id="info-faq">
+              <div class="info-icon">❓</div>
+              <h3 class="info-title">Common Questions</h3>
+              <p class="info-text">Before reaching out, you might find your answer in our <a href="how-it-works.html#faq" class="info-link">FAQ section</a>. We cover how GiftKaro works, affiliate disclosures, and more.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo" data-od-id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand" data-od-id="footer-brand">
+          <div class="footer-logo" data-od-id="footer-logo">🎁 GiftKaro</div>
+          <p class="footer-desc" data-od-id="footer-desc">Curated gift discovery for every occasion. We help you find thoughtful, unique gifts — no cart, no checkout, just click through to Amazon.</p>
+        </div>
+        <nav aria-label="Festival gifts" data-od-id="footer-festivals">
+          <h3 class="footer-heading" data-od-id="footer-festivals-title">Festivals</h3>
+          <ul class="footer-links" data-od-id="footer-festivals-links">
+            <li><a href="category.html?cat=diwali" class="footer-link">Diwali</a></li>
+            <li><a href="category.html?cat=christmas" class="footer-link">Christmas</a></li>
+            <li><a href="category.html?cat=valentines" class="footer-link">Valentine's Day</a></li>
+            <li><a href="category.html?cat=holi" class="footer-link">Holi</a></li>
+            <li><a href="category.html?cat=eid" class="footer-link">Eid</a></li>
+            <li><a href="category.html?cat=rakhi" class="footer-link">Raksha Bandhan</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Occasions" data-od-id="footer-occasions">
+          <h3 class="footer-heading" data-od-id="footer-occasions-title">Occasions</h3>
+          <ul class="footer-links" data-od-id="footer-occasions-links">
+            <li><a href="category.html?cat=birthday" class="footer-link">Birthday</a></li>
+            <li><a href="category.html?cat=anniversary" class="footer-link">Anniversary</a></li>
+            <li><a href="category.html?cat=housewarming" class="footer-link">Housewarming</a></li>
+            <li><a href="category.html?cat=wedding" class="footer-link">Wedding</a></li>
+            <li><a href="category.html?cat=baby-shower" class="footer-link">Baby Shower</a></li>
+            <li><a href="category.html?cat=graduation" class="footer-link">Graduation</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Vibes" data-od-id="footer-vibes">
+          <h3 class="footer-heading" data-od-id="footer-vibes-title">Vibes</h3>
+          <ul class="footer-links" data-od-id="footer-vibes-links">
+            <li><a href="search.html?vibe=minimal" class="footer-link">Minimal</a></li>
+            <li><a href="search.html?vibe=luxury" class="footer-link">Luxury</a></li>
+            <li><a href="search.html?vibe=quirky" class="footer-link">Quirky</a></li>
+            <li><a href="search.html?vibe=sentimental" class="footer-link">Sentimental</a></li>
+            <li><a href="search.html?vibe=eco-friendly" class="footer-link">Eco-Friendly</a></li>
+            <li><a href="search.html?vibe=tech" class="footer-link">Tech</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom" data-od-id="footer-bottom">
+        <p class="footer-disclosure" data-od-id="footer-disclosure">As an Amazon Associate, I earn from qualifying purchases</p>
+        <p class="footer-copyright" data-od-id="footer-copyright">© 2026 GiftKaro. Not affiliated with Amazon.in. All product links are affiliate links.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function setupThemeToggle() {
+      const toggle = document.getElementById('themeToggle');
+      const themes = ['default', 'diwali', 'christmas', 'valentines'];
+      let currentIndex = themes.indexOf(document.documentElement.dataset.theme || 'default');
+      if (currentIndex === -1) currentIndex = 0;
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % themes.length;
+          const theme = themes[currentIndex];
+          document.documentElement.dataset.theme = theme === 'default' ? '' : theme;
+          localStorage.setItem('giftkaro-theme', theme);
+        });
+      }
+    }
+
+    function setupMobileMenu() {
+      const btn = document.getElementById('mobileMenuBtn');
+      const menu = document.getElementById('mobileMenu');
+      const close = document.getElementById('mobileMenuClose');
+      const backdrop = document.getElementById('mobileMenuBackdrop');
+      function openMenu() {
+        menu.classList.add('open');
+        backdrop.classList.add('open');
+        backdrop.style.display = 'block';
+        btn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMenu() {
+        menu.classList.remove('open');
+        backdrop.classList.remove('open');
+        backdrop.style.display = '';
+        btn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+      btn?.addEventListener('click', openMenu);
+      close?.addEventListener('click', closeMenu);
+      backdrop?.addEventListener('click', closeMenu);
+      menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu?.classList.contains('open')) closeMenu();
+      });
+    }
+
+    function setupContactForm() {
+      const form = document.getElementById('contactForm');
+      const success = document.getElementById('formSuccess');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          // Simulate submission
+          form.style.display = 'none';
+          success.classList.add('visible');
+        });
+      }
+    }
+
+    (function() {
+      const saved = localStorage.getItem('giftkaro-theme');
+      if (saved && saved !== 'default') {
+        document.documentElement.dataset.theme = saved;
+      } else {
+        const today = new Date();
+        const mmdd = `${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+        let theme = '';
+        if (mmdd >= '10-15' && mmdd <= '11-05') theme = 'diwali';
+        else if (mmdd >= '12-01' && mmdd <= '12-26') theme = 'christmas';
+        else if (mmdd >= '02-01' && mmdd <= '02-15') theme = 'valentines';
+        if (theme) document.documentElement.dataset.theme = theme;
+      }
+      setupThemeToggle();
+      setupMobileMenu();
+      setupContactForm();
+    })();
+  </script>
+</body>
+</html>
